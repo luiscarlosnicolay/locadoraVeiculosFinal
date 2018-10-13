@@ -8,7 +8,6 @@ package controller;
 import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.JTable;
-import models.Aluno;
 import connection.ConnectionFactory;
 import java.awt.Color;
 import java.awt.Component;
@@ -18,43 +17,45 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-//import sun.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableCellRenderer;
-import models.Usuario;
+import models.Cliente;
 
 /**
  *
  * @author Janquiel Kappler
  */
-public class AlunoController {
+public class ClienteController {
     
-    Aluno objAluno;  
-    JTable jTableAlunos = null;
+    Cliente objCliente;  
+    JTable jtbClientes = null;
     
-    public AlunoController(Aluno objAluno, JTable jTableAlunos) {
-        this.objAluno = objAluno;
-        this.jTableAlunos = jTableAlunos;
+    public ClienteController(Cliente objCliente, JTable jtbClientes) {
+        this.objCliente = objCliente;
+        this.jtbClientes = jtbClientes;
     }
     
-    public void PreencheAlunos() {
+    public void PreencheCientes() {
         
         ConnectionFactory.abreConexao();
         
         Vector<String> cabecalhos = new Vector<String>();
         Vector dadosTabela = new Vector();
-        cabecalhos.add("Matricula");
-        cabecalhos.add("Curso");
+        cabecalhos.add("Código");
         cabecalhos.add("Nome");
+        cabecalhos.add("CPF/CNPJ");
+        cabecalhos.add("Telefone");
+        cabecalhos.add("Endereço");
+        cabecalhos.add("Cidade");
+        cabecalhos.add("Data de Nascimento");
         
         ResultSet result = null;
         
         try{
             
             String SQL = "";
-            SQL = " SELECT a.mat_alu, c.nom_curso, a.nom_alu ";
-            SQL += " FROM alunos a, cursos c ";
-            SQL += " WHERE a.cod_curso = c.cod_curso ";
-            SQL += " ORDER BY nom_alu ";
+            SQL = " SELECT c.codcliente, c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, c.codcid, c.dtnasc ";
+            SQL += " FROM cliente c ";
+            SQL += " ORDER BY nmcliente ";
             
             result = ConnectionFactory.stmt.executeQuery(SQL);
             
@@ -63,6 +64,10 @@ public class AlunoController {
                 linha.add(result.getInt(1));
                 linha.add(result.getString(2));
                 linha.add(result.getString(3));
+                linha.add(result.getString(4));
+                linha.add(result.getString(5));
+                linha.add(result.getString(6));
+                linha.add(result.getDate(7));
                 dadosTabela.add(linha);
             }
         } catch (SQLException e) {
@@ -70,7 +75,7 @@ public class AlunoController {
             System.out.println(e);
         }
         
-        jTableAlunos.setModel(new DefaultTableModel(dadosTabela, cabecalhos) {
+        jtbClientes.setModel(new DefaultTableModel(dadosTabela, cabecalhos) {
             
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -80,26 +85,41 @@ public class AlunoController {
         });
         
         //Permite seleção de apenas uma linha da tabela
-        jTableAlunos.setSelectionMode(0);
+        jtbClientes.setSelectionMode(0);
         
         //Redimensiona as colunas de uma tabela
         TableColumn column = null;
         for (int i = 0; i < 3; i++) {
-            column = jTableAlunos.getColumnModel().getColumn(i);
+            column = jtbClientes.getColumnModel().getColumn(i);
             switch (1) {
                 case 0:
-                column.setPreferredWidth(80);
-                break;
+                    column.setPreferredWidth(80);
+                    break;
                 case 1:
-                column.setPreferredWidth(150);
-                break;
+                    column.setPreferredWidth(150);
+                    break;
                 case 2:
-                column.setPreferredWidth(150);
-                break;
+                    column.setPreferredWidth(150);
+                    break;
+                case 3:
+                    column.setPreferredWidth(150);
+                    break;
+                case 4:
+                    column.setPreferredWidth(150);
+                    break;
+                case 5:
+                    column.setPreferredWidth(150);
+                    break;
+                case 6:
+                    column.setPreferredWidth(150);
+                    break;
+                case 7:
+                    column.setPreferredWidth(150);
+                    break;
             }
         }
         
-        jTableAlunos.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+        jtbClientes.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             
             @Override
             public Component getTableCellRendererComponent (JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -119,16 +139,16 @@ public class AlunoController {
         //return (true);
     }
     
-    public Aluno buscarAlunos(String id){
+    public Cliente buscarAlunos(String id){
         
         try {
             ConnectionFactory.abreConexao();
             ResultSet rs = null;
 
             String SQL = "";
-            SQL = " SELECT mat_alu, nom_alu, email, cod_curso, dat_nasc";
-            SQL += " FROM alunos";
-            SQL += " WHERE mat_alu = '" + id + "'";
+            SQL = " SELECT c.codcliente, c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, c.codcid, c.dtnasc ";
+            SQL += " FROM clientes ";
+            SQL += " WHERE codcliente = '" + id + "'";
             //stm.executeQuery(SQL);
 
             try{
@@ -136,15 +156,18 @@ public class AlunoController {
                 rs = ConnectionFactory.stmt.executeQuery(SQL);
                 System.out.println("Executou Conexão em buscar aluno");
                 
-               objAluno = new Aluno();
+               objCliente = new Cliente();
                
                 if(rs.next() == true)
                 {
-                    objAluno.setMat_aluno(rs.getInt(1));
-                    objAluno.setNom_aluno(rs.getString(2));
-                    objAluno.setEmail(rs.getString(3));
-                    objAluno.setCod_curso(rs.getInt(4));
-                    objAluno.setDat_nasc(String.valueOf(rs.getDate(5)));
+                    objCliente.setCodcliente(rs.getInt(1));
+                    objCliente.setCodcid(rs.getInt(2));
+                    objCliente.setNmcliente(rs.getString(3));
+                    objCliente.setCpfcnpj(rs.getString(4));
+                    objCliente.setTelefone(rs.getString(5));
+                    objCliente.setEndereco(rs.getString(6));
+                    objCliente.setDtnasc(String.valueOf(rs.getDate(7)));
+                    
                 }
             }
 
@@ -160,10 +183,10 @@ public class AlunoController {
         }
         
         System.out.println ("Executou buscar aluno com sucesso");
-        return objAluno;
+        return objCliente;
     }
     
-    public boolean incluirAluno(Aluno objAluno){      
+    public boolean incluirAluno(Cliente objCliente){      
         
         
         ConnectionFactory.abreConexao();
@@ -171,7 +194,7 @@ public class AlunoController {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO alunos (mat_alu, cod_curso, nom_alu, email, dat_nasc)VALUES(?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO clientes (mat_alu, cod_curso, nom_alu, email, dat_nasc)VALUES(?,?,?,?,?)");
             stmt.setInt(1, objAluno.getMat_aluno());
             stmt.setInt(2, objAluno.getCod_curso());
             stmt.setString(3, objAluno.getNom_aluno());

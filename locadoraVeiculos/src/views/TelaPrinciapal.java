@@ -29,27 +29,32 @@ public class TelaPrinciapal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuCadastroClientes = new javax.swing.JMenuItem();
+        jMenuCadstroCidades = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuSair = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("Cadastros");
 
-        jMenuItem1.setText("Clientes");
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Cidades");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuCadastroClientes.setText("Clientes");
+        jMenuCadastroClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuCadastroClientesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(jMenuCadastroClientes);
+
+        jMenuCadstroCidades.setText("Cidades");
+        jMenuCadstroCidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCadstroCidadesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuCadstroCidades);
 
         jMenuBar1.add(jMenu1);
 
@@ -60,12 +65,17 @@ public class TelaPrinciapal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Sair");
+        jMenuSair.setText("Sair");
 
         jMenuItem4.setText("Sair");
-        jMenu3.add(jMenuItem4);
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuSair.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMenuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -83,9 +93,22 @@ public class TelaPrinciapal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuCadstroCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadstroCidadesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        CadastroCidadeView cadastrocidade = new CadastroCidadeView();
+        cadastrocidade.setVisible(true);
+    }//GEN-LAST:event_jMenuCadstroCidadesActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroClientesActionPerformed
+        // TODO add your handling code here:
+        CadastroClienteView cadastrocliente = new CadastroClienteView();
+        cadastrocliente.setVisible(true);
+    }//GEN-LAST:event_jMenuCadastroClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,11 +149,11 @@ public class TelaPrinciapal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuCadastroClientes;
+    private javax.swing.JMenuItem jMenuCadstroCidades;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenu jMenuSair;
     // End of variables declaration//GEN-END:variables
 }
