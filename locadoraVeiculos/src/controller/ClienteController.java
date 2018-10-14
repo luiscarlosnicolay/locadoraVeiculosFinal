@@ -139,7 +139,7 @@ public class ClienteController {
         //return (true);
     }
     
-    public Cliente buscarAlunos(String id){
+    public Cliente buscarClientes(String id){
         
         try {
             ConnectionFactory.abreConexao();
@@ -186,7 +186,7 @@ public class ClienteController {
         return objCliente;
     }
     
-    public boolean incluirAluno(Cliente objCliente){      
+    public boolean incluirCliente(Cliente objCliente){      
         
         
         ConnectionFactory.abreConexao();
@@ -194,12 +194,12 @@ public class ClienteController {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO clientes (mat_alu, cod_curso, nom_alu, email, dat_nasc)VALUES(?,?,?,?,?)");
-            stmt.setInt(1, objAluno.getMat_aluno());
-            stmt.setInt(2, objAluno.getCod_curso());
-            stmt.setString(3, objAluno.getNom_aluno());
-            stmt.setString(4, objAluno.getEmail());
-            stmt.setDate(5, Date.valueOf(objAluno.getDat_nasc()));
+            stmt = con.prepareStatement("INSERT INTO cliente (nmcliente, cpf_cnpj, telefome, endereco, dtnasc)VALUES(?,?,?,?,?)");
+            stmt.setString(1, objCliente.getNmcliente());
+            stmt.setString(2, objCliente.getCpfcnpj());
+            stmt.setString(3, objCliente.getTelefone());
+            stmt.setString(4, objCliente.getEndereco());
+            stmt.setDate(5, Date.valueOf(objCliente.getDtnasc()));
             
             stmt.executeUpdate();
             
@@ -214,7 +214,7 @@ public class ClienteController {
         
     }
     
-    public boolean alterarAluno(){
+    public boolean alterarCliente(){
  
         ConnectionFactory.abreConexao();
         Connection con = ConnectionFactory.getConnection();
@@ -222,11 +222,11 @@ public class ClienteController {
  
         try {
             stmt = con.prepareStatement("UPDATE alunos SET nome=?, cod_curso=?, email=?, cod_curso=?, dat_nasc=? WHERE mat_alu=?");
-            stmt.setString(1, objAluno.getNom_aluno());
-            stmt.setInt(2, objAluno.getCod_curso());
-            stmt.setString(3, objAluno.getEmail());
-            stmt.setInt(4, objAluno.getCod_curso());
-            stmt.setDate(5, Date.valueOf(objAluno.getDat_nasc()));
+            stmt.setString(1, objCliente.getNmcliente());
+            stmt.setString(2, objCliente.getCpfcnpj());
+            stmt.setString(3, objCliente.getTelefone());
+            stmt.setString(4, objCliente.getEndereco());
+            stmt.setDate(5, Date.valueOf(objCliente.getDtnasc()));
             
  
             stmt.executeUpdate();
