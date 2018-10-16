@@ -160,6 +160,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbClientes);
 
         jLabel8.setText("Cidade:");
@@ -331,6 +336,43 @@ public class CadastroClienteView extends javax.swing.JFrame {
         
         limparTela();*/
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
+
+    private void preencheCampos() {
+        try {
+            txtNome.setText(objCliente.getNmcliente());
+            txtCpfCnpj.setText(objCliente.getCpfcnpj());
+            txtTelefone.setText(objCliente.getTelefone());
+            txtEndereco.setText(objCliente.getEndereco());            
+            cbCidade.SetaComboBox(String.valueOf(objCliente.getCodcid()));
+
+            //Ajusta a data para DIA/MES/ANO
+            String dataFormatada = Formatacao.ajustaDataDMA(objCliente.getDtnasc());
+            txtDtNasc.setText(dataFormatada);
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }
+    
+    private void jtbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbClientesMouseClicked
+        // TODO add your handling code here:
+        try {
+
+            //pega a linha selecionada
+            int linhaSelecionada = jtbClientes.getSelectedRow();
+            // Primeira coluna da linha
+            String coluna1 = jtbClientes.getModel().getValueAt(linhaSelecionada, 0).toString();
+
+            //basta agora chamar o método buscar, passando o COLUNA1 como parâmetro de consulta
+            ClienteController objClienteCon = new ClienteController(null, null);
+            objCliente = objClienteCon.buscarClientes(coluna1);
+
+            preencheCampos();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jtbClientesMouseClicked
 
     private void guardarDados() {
         try {

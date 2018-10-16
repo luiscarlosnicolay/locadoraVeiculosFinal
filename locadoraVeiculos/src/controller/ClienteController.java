@@ -147,7 +147,7 @@ public class ClienteController {
 
             String SQL = "";
             SQL = " SELECT c.codcliente, c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, c.codcid, c.dtnasc ";
-            SQL += " FROM clientes ";
+            SQL += " FROM cliente c ";
             SQL += " WHERE codcliente = '" + id + "'";
             //stm.executeQuery(SQL);
 
