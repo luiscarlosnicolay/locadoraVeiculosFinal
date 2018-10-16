@@ -58,7 +58,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         try {
             //LIMPAR OS CAMPOS DA TELA
             //LIBERAR O CAMPO MATRICULA
-            jcbCidade.SetaComboBox("");
+            cbCidade.SetaComboBox("");
             txtNome.setText("");
             txtCpfCnpj.setText("");
             txtDtNasc.setText("");
@@ -296,7 +296,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
     private void btnInncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInncluirClienteActionPerformed
         // TODO add your handling code here:
-        if (validarDados() == true) {
+       /* if (validarDados() == true) {
             //PREENCHE O OBJETO CLIENTE
             guardarDados();
 
@@ -312,12 +312,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
             }
 
             limparTela();
-        }
+        }*/
     }//GEN-LAST:event_btnInncluirClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
         // TODO add your handling code here:
-        String matricula = txtMatricula.getText();
+     /*  String matricula = txtMatricula.getText();
         ClienteController objClienteCon = new ClienteController(null, null);
         try {
             if (objClienteCon.excluirCliente(matricula) == true) {
@@ -329,7 +329,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
         }
         
-        limparTela();
+        limparTela();*/
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
     private void guardarDados() {
@@ -342,7 +342,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             
             //AJUSTA A DATA PARA ANO-MES-DIA PARA GRAVAR NO BANCO
             String dataFormatada = Formatacao.ajustaDataAMD(txtDtNasc.getText());
-            objCliente.setDtNasc(dataFormatada);
+            objCliente.setDtnasc(dataFormatada);
             
             //RECUPERANDO A CIDADE DO CLIENTE
             Combos c = (Combos) jcbCidade.getSelectedItem();

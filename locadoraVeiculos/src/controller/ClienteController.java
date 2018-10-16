@@ -34,7 +34,7 @@ public class ClienteController {
         this.jtbClientes = jtbClientes;
     }
     
-    public void PreencheCientes() {
+    public void PreencheClientes() {
         
         ConnectionFactory.abreConexao();
         
