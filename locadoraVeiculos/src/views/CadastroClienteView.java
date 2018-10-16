@@ -287,9 +287,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
             ClienteController objClienteCon = new ClienteController(objCliente, null);
             if (objClienteCon.alterarCliente() == true) {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Aluno alterado com Sucesso!");
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Cliente alterado com Sucesso!");
             } else {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("OPS! Erro ao alterar aluno, que pena!!!");
+                CaixaDeDialogo.obterinstancia().exibirMensagem("OPS! Erro ao alterar cliente, que pena!!!");
             }
 
             limparTela();
@@ -344,6 +344,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             txtTelefone.setText(objCliente.getTelefone());
             txtEndereco.setText(objCliente.getEndereco());            
             cbCidade.SetaComboBox(String.valueOf(objCliente.getCodcid()));
+            //cbEstado.SetaComboBox(String.valueOf(objCliente.getUf()));
 
             //Ajusta a data para DIA/MES/ANO
             String dataFormatada = Formatacao.ajustaDataDMA(objCliente.getDtnasc());

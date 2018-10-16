@@ -93,28 +93,28 @@ public class ClienteController {
             column = jtbClientes.getColumnModel().getColumn(i);
             switch (1) {
                 case 0:
-                    column.setPreferredWidth(80);
+                    column.setPreferredWidth(30);
                     break;
                 case 1:
-                    column.setPreferredWidth(150);
+                    column.setPreferredWidth(50);
                     break;
                 case 2:
-                    column.setPreferredWidth(150);
+                    column.setPreferredWidth(30);
                     break;
                 case 3:
-                    column.setPreferredWidth(150);
+                    column.setPreferredWidth(30);
                     break;
                 case 4:
-                    column.setPreferredWidth(150);
+                    column.setPreferredWidth(30);
                     break;
                 case 5:
-                    column.setPreferredWidth(150);
+                    column.setPreferredWidth(30);
                     break;
                 case 6:
-                    column.setPreferredWidth(150);
+                    column.setPreferredWidth(30);
                     break;
                 case 7:
-                    column.setPreferredWidth(150);
+                    column.setPreferredWidth(30);
                     break;
             }
         }
@@ -161,11 +161,11 @@ public class ClienteController {
                 if(rs.next() == true)
                 {
                     objCliente.setCodcliente(rs.getInt(1));
-                    objCliente.setCodcid(rs.getInt(2));
-                    objCliente.setNmcliente(rs.getString(3));
-                    objCliente.setCpfcnpj(rs.getString(4));
-                    objCliente.setTelefone(rs.getString(5));
-                    objCliente.setEndereco(rs.getString(6));
+                    objCliente.setNmcliente(rs.getString(2));                                     
+                    objCliente.setCpfcnpj(rs.getString(3));
+                    objCliente.setTelefone(rs.getString(4));
+                    objCliente.setEndereco(rs.getString(5));
+                    objCliente.setCodcid(rs.getInt(6));
                     objCliente.setDtnasc(String.valueOf(rs.getDate(7)));
                     
                 }
@@ -194,7 +194,7 @@ public class ClienteController {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO cliente (nmcliente, cpf_cnpj, telefome, endereco, dtnasc)VALUES(?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO cliente (nmcliente, cpf_cnpj, telefone, endereco, dtnasc)VALUES(?,?,?,?,?)");
             stmt.setString(1, objCliente.getNmcliente());
             stmt.setString(2, objCliente.getCpfcnpj());
             stmt.setString(3, objCliente.getTelefone());
@@ -221,12 +221,13 @@ public class ClienteController {
         PreparedStatement stmt = null;
  
         try {
-            stmt = con.prepareStatement("UPDATE alunos SET nome=?, cod_curso=?, email=?, cod_curso=?, dat_nasc=? WHERE mat_alu=?");
-            stmt.setString(1, objCliente.getNmcliente());
-            stmt.setString(2, objCliente.getCpfcnpj());
-            stmt.setString(3, objCliente.getTelefone());
-            stmt.setString(4, objCliente.getEndereco());
-            stmt.setDate(5, Date.valueOf(objCliente.getDtnasc()));
+            stmt = con.prepareStatement("UPDATE cliente SET nmcliente=?, cpf_cnpj=?, telefone=?, endereco=?, dtnasc=? WHERE codcliente=?");
+            stmt.setInt(1, objCliente.getCodcliente());
+            stmt.setString(2, objCliente.getNmcliente());
+            stmt.setString(3, objCliente.getCpfcnpj());
+            stmt.setString(4, objCliente.getTelefone());
+            stmt.setString(5, objCliente.getEndereco());
+            stmt.setDate(6, Date.valueOf(objCliente.getDtnasc()));
             
  
             stmt.executeUpdate();

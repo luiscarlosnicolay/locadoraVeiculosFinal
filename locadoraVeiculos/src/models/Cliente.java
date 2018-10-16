@@ -17,6 +17,7 @@ public class Cliente {
     private String cpfcnpj;
     private String telefone;
     private String endereco;
+    //private String uf;
     private String dtnasc;
 
     public int getCodcliente() {
