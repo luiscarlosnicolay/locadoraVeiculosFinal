@@ -17,8 +17,8 @@ public class Cliente {
     private String cpfcnpj;
     private String telefone;
     private String endereco;
-    //private String uf;
     private String dtnasc;
+    private String uf;
 
     public int getCodcliente() {
         return codcliente;
@@ -75,6 +75,15 @@ public class Cliente {
     public void setDtnasc(String dtnasc) {
         this.dtnasc = dtnasc;
     }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+    
     
     
     

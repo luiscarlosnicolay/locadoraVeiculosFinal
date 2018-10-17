@@ -51,13 +51,12 @@ public class LoginView extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         lblCapsLook = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela de Login");
 
         lblLogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
         lblLogin.setText("Usuário");
 
         txtUsuario.setToolTipText("Digite seu usuário");
@@ -68,7 +67,6 @@ public class LoginView extends javax.swing.JFrame {
         });
 
         lblSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblSenha.setText("Senha");
 
         txtSenha.setToolTipText("Digite sua senha");
@@ -86,7 +84,7 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logounivates.png"))); // NOI18N
 
         lblCapsLook.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -97,8 +95,18 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo.png"))); // NOI18N
+        btnSair.setBackground(new java.awt.Color(0, 102, 255));
+        btnSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSair.setForeground(new java.awt.Color(255, 255, 255));
+        btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/login.png"))); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.setToolTipText("Entrar no jogo");
+        btnSair.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,19 +115,18 @@ public class LoginView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(btnEntrar))
                     .addComponent(lblSenha)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblLogin)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCapsLook, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblCapsLook, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEntrar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSair)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -136,12 +143,12 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(lblCapsLook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEntrar)
+                    .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,6 +177,11 @@ public class LoginView extends javax.swing.JFrame {
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,7 +262,7 @@ public class LoginView extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblCapsLook;
     private javax.swing.JLabel lblLogin;

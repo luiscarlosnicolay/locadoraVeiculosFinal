@@ -6,6 +6,9 @@
 package views;
 
 import controller.ClienteController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.Cliente;
 import tools.CaixaDeDialogo;
 import tools.Combos;
@@ -33,8 +36,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
             atualizarTabela();
 
             //carregar os cursos existentes
-            cbCidade = new Combos(jcbCidade);
-            cbCidade.PreencheCombo("SELECT codcid, nmcidade FROM cidade ORDER BY nmcidade");
+            
+            
+            cbEstado = new Combos(jcbEstado);
+            cbEstado.PreencheCombo("SELECT uf, uf FROM cidade ORDER BY uf");
 
             limparTela();
 
@@ -148,6 +153,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
         });
 
         btnLimparTelaCliente.setText("Limpar");
+        btnLimparTelaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparTelaClienteActionPerformed(evt);
+            }
+        });
 
         jtbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,6 +182,11 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabel9.setText("Estado:");
 
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEstadoActionPerformed(evt);
+            }
+        });
 
         jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -301,7 +316,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
     private void btnInncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInncluirClienteActionPerformed
         // TODO add your handling code here:
-       /* if (validarDados() == true) {
+        /*//if (validarDados() == true) {
             //PREENCHE O OBJETO CLIENTE
             guardarDados();
 
@@ -317,24 +332,23 @@ public class CadastroClienteView extends javax.swing.JFrame {
             }
 
             limparTela();
-        }*/
+       // }*/
     }//GEN-LAST:event_btnInncluirClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
         // TODO add your handling code here:
-     /*  String matricula = txtMatricula.getText();
         ClienteController objClienteCon = new ClienteController(null, null);
         try {
-            if (objClienteCon.excluirCliente(matricula) == true) {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Aluno removido com Sucesso!");
+            if (objClienteCon.excluirCliente(objCliente) == true) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Cliente removido com Sucesso!");
             } else {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao remover aluno!");
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao remover Cliente!");
             }
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
         }
         
-        limparTela();*/
+        limparTela();
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
 
     private void preencheCampos() {
@@ -342,9 +356,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
             txtNome.setText(objCliente.getNmcliente());
             txtCpfCnpj.setText(objCliente.getCpfcnpj());
             txtTelefone.setText(objCliente.getTelefone());
-            txtEndereco.setText(objCliente.getEndereco());            
+            txtEndereco.setText(objCliente.getEndereco());
+            cbEstado.SetaComboBox(String.valueOf(objCliente.getUf()));
             cbCidade.SetaComboBox(String.valueOf(objCliente.getCodcid()));
-            //cbEstado.SetaComboBox(String.valueOf(objCliente.getUf()));
 
             //Ajusta a data para DIA/MES/ANO
             String dataFormatada = Formatacao.ajustaDataDMA(objCliente.getDtnasc());
@@ -374,6 +388,26 @@ public class CadastroClienteView extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_jtbClientesMouseClicked
+
+    private void btnLimparTelaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparTelaClienteActionPerformed
+        // TODO add your handling code here:
+        limparTela();
+    }//GEN-LAST:event_btnLimparTelaClienteActionPerformed
+
+    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
+        try {
+            Combos c = new Combos();
+            if (jcbEstado.getSelectedIndex() > 0) {
+            c = (Combos) jcbEstado.getSelectedItem();
+            String estado = c.getCodigo();
+            
+            cbCidade = new Combos(jcbCidade);
+            cbCidade.PreencheCombo("SELECT codcid, nmcidade FROM cidade WHERE uf = '"+ estado +"' ORDER BY nmcidade");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroClienteView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jcbEstadoActionPerformed
 
     private void guardarDados() {
         try {

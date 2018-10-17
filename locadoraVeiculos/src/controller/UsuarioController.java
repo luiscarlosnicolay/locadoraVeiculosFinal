@@ -41,7 +41,7 @@ public class UsuarioController {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO usuarios (login_usuario, senha_usuario, nome)VALUES(?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO usuarios (login, senha, nome)VALUES(?,?,?)");
             stmt.setString(1, objUsuario.getLogin());
             stmt.setString(2, objUsuario.getSenha());
             stmt.setString(3, objUsuario.getNome());
@@ -67,7 +67,7 @@ public class UsuarioController {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("DELETE FROM usuarios WHERE login_usuario = ? ");
+            stmt = con.prepareStatement("DELETE FROM usuarios WHERE login = ? ");
             stmt.setString(1, objUsuario.getLogin());
             
             stmt.executeUpdate();
@@ -98,7 +98,7 @@ public class UsuarioController {
         try{
             
             String SQL = "";
-            SQL = " SELECT  u.nome, u.login_usuario, u.senha_usuario";
+            SQL = " SELECT  u.nome, u.login, u.senha";
             SQL += " FROM usuarios u ";
             SQL += " ORDER BY u.nome ";
             
@@ -167,9 +167,9 @@ public class UsuarioController {
             ResultSet rs = null;
 
             String SQL = "";
-            SQL = " SELECT login_usuario, senha_usuario, nome";
+            SQL = " SELECT login, senha, nome";
             SQL += " FROM usuarios";
-            SQL += " WHERE login_usuario = '" + id + "'";
+            SQL += " WHERE login = '" + id + "'";
             //stm.executeQuery(SQL);
 
             try{

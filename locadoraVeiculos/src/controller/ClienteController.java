@@ -46,6 +46,7 @@ public class ClienteController {
         cabecalhos.add("Telefone");
         cabecalhos.add("Endereço");
         cabecalhos.add("Cidade");
+        cabecalhos.add("UF");
         cabecalhos.add("Data de Nascimento");
         
         ResultSet result = null;
@@ -53,8 +54,9 @@ public class ClienteController {
         try{
             
             String SQL = "";
-            SQL = " SELECT c.codcliente, c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, c.codcid, c.dtnasc ";
-            SQL += " FROM cliente c ";
+            SQL = " SELECT c.codcliente, c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, ci.nmcidade, ci.uf, c.dtnasc ";
+            SQL += " FROM cliente c, cidade ci ";
+            SQL += " WHERE c.codcid = ci.codcid ";
             SQL += " ORDER BY nmcliente ";
             
             result = ConnectionFactory.stmt.executeQuery(SQL);
@@ -67,7 +69,8 @@ public class ClienteController {
                 linha.add(result.getString(4));
                 linha.add(result.getString(5));
                 linha.add(result.getString(6));
-                linha.add(result.getDate(7));
+                linha.add(result.getString(7));
+                linha.add(result.getDate(8));
                 dadosTabela.add(linha);
             }
         } catch (SQLException e) {
@@ -227,7 +230,7 @@ public class ClienteController {
             stmt.setString(3, objCliente.getCpfcnpj());
             stmt.setString(4, objCliente.getTelefone());
             stmt.setString(5, objCliente.getEndereco());
-            stmt.setDate(6, Date.valueOf(objCliente.getDtnasc()));
+            stmt.setDate(5, Date.valueOf(objCliente.getDtnasc()));
             
  
             stmt.executeUpdate();
@@ -241,5 +244,28 @@ public class ClienteController {
             ConnectionFactory.closeConnection(con, stmt);
         }
  
+    }
+    public boolean excluirCliente(Cliente objCliente){      
+        
+        
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("DELETE FROM cliente WHERE codcliente = ? ");
+            stmt.setInt(1, objCliente.getCodcliente());
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
     }
 }
