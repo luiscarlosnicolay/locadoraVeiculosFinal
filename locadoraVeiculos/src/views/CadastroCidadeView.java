@@ -5,19 +5,58 @@
  */
 package views;
 
+import controller.CidadeController;
+import models.Cidade;
+import tools.CaixaDeDialogo;
+import tools.Combos;
+import tools.Formatacao;
+
 /**
  *
  * @author luis_
  */
 public class CadastroCidadeView extends javax.swing.JFrame {
+    
+    Cidade objCidade;
 
     /**
      * Creates new form CadastroCidadeView
      */
     public CadastroCidadeView() {
         initComponents();
-    }
+        
+        try {
+            atualizarTabela();
 
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
+    
+    private void atualizarTabela() {
+        try {
+
+            CidadeController cidadeCon = new CidadeController(null, jtbCidades);
+            cidadeCon.PreencheCidades();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
+    
+    private void limparTela() {
+        try {
+            //LIMPAR OS CAMPOS DA TELA
+            txtNomeCidade.setText("");
+            txtCep.setText("");
+            txtUf.setText("");
+            
+            atualizarTabela();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,12 +73,12 @@ public class CadastroCidadeView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtCep = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         btnIncluirCidade = new javax.swing.JButton();
         btnExcluirCidade = new javax.swing.JButton();
         btnLimparCamposCidade = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbCidades = new javax.swing.JTable();
+        txtUf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,16 +92,19 @@ public class CadastroCidadeView extends javax.swing.JFrame {
 
         jLabel4.setText("UF:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        btnIncluirCidade.setText("Incluir");
+        btnIncluirCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                btnIncluirCidadeActionPerformed(evt);
             }
         });
 
-        btnIncluirCidade.setText("Incluir");
-
         btnExcluirCidade.setText("Excluir");
+        btnExcluirCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirCidadeActionPerformed(evt);
+            }
+        });
 
         btnLimparCamposCidade.setText("Limpar");
 
@@ -77,6 +119,11 @@ public class CadastroCidadeView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbCidades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbCidadesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbCidades);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -85,37 +132,37 @@ public class CadastroCidadeView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(167, 167, 167)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtCep)
+                                            .addComponent(txtUf))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnIncluirCidade)
+                                    .addComponent(btnExcluirCidade)
+                                    .addComponent(btnLimparCamposCidade))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCep))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnIncluirCidade)
-                            .addComponent(btnExcluirCidade)
-                            .addComponent(btnLimparCamposCidade))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 607, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -138,8 +185,8 @@ public class CadastroCidadeView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimparCamposCidade))
+                    .addComponent(btnLimparCamposCidade)
+                    .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -148,10 +195,85 @@ public class CadastroCidadeView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void btnIncluirCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirCidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+        //PREENCHE O OBJETO CLIENTE
+            guardarDados();
 
+            CidadeController objCidadeCon = new CidadeController(objCidade, null);
+            try {
+                if (objCidadeCon.incluirCidade(objCidade) == true) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Cidade incluída com Sucesso!");
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir cidade!");
+                }
+            } catch (Exception ex) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            }
+
+            limparTela();
+    }//GEN-LAST:event_btnIncluirCidadeActionPerformed
+
+    private void btnExcluirCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCidadeActionPerformed
+        // TODO add your handling code here:
+        CidadeController objCidadeCon = new CidadeController(null, null);
+        try {
+            if (objCidadeCon.excluirCidade(objCidade) == true) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Cidade removida com Sucesso!");
+            } else {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao remover cidade!");
+            }
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+        
+        limparTela();
+    }//GEN-LAST:event_btnExcluirCidadeActionPerformed
+
+    private void jtbCidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbCidadesMouseClicked
+        // TODO add your handling code here:
+        try {
+
+            //pega a linha selecionada
+            int linhaSelecionada = jtbCidades.getSelectedRow();
+            // Primeira coluna da linha
+            String coluna1 = jtbCidades.getModel().getValueAt(linhaSelecionada, 0).toString();
+
+            //basta agora chamar o método buscar, passando o COLUNA1 como parâmetro de consulta
+            CidadeController objCidadeCon = new CidadeController(null, null);
+            objCidade = objCidadeCon.buscarCidades(coluna1);
+
+            preencheCampos();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jtbCidadesMouseClicked
+
+    private void preencheCampos() {
+        try {
+            txtNomeCidade.setText(objCidade.getNmcidade());
+            txtCep.setText(objCidade.getCep());
+            txtUf.setText(objCidade.getUf());
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }
+    
+    private void guardarDados() {
+        try {
+            objCidade = new Cidade();
+            objCidade.setNmcidade(txtNomeCidade.getText());
+            objCidade.setCep(txtCep.getText());
+            objCidade.setUf(txtUf.getText());
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -191,7 +313,6 @@ public class CadastroCidadeView extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluirCidade;
     private javax.swing.JButton btnIncluirCidade;
     private javax.swing.JButton btnLimparCamposCidade;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -201,5 +322,6 @@ public class CadastroCidadeView extends javax.swing.JFrame {
     private javax.swing.JTable jtbCidades;
     private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtNomeCidade;
+    private javax.swing.JTextField txtUf;
     // End of variables declaration//GEN-END:variables
 }
