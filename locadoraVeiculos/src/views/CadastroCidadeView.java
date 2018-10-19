@@ -8,8 +8,6 @@ package views;
 import controller.CidadeController;
 import models.Cidade;
 import tools.CaixaDeDialogo;
-import tools.Combos;
-import tools.Formatacao;
 
 /**
  *
