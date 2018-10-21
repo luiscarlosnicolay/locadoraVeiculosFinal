@@ -34,8 +34,8 @@ public class CadastroCidadeView extends javax.swing.JFrame {
     private void atualizarTabela() {
         try {
 
-            CidadeController cidadeCon = new CidadeController(null, jtbCidades);
-            cidadeCon.PreencheCidades();
+          //  CidadeController cidadeCon = new CidadeController(null, jtbCidades);
+          //  cidadeCon.PreencheCidades();
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
@@ -196,7 +196,7 @@ public class CadastroCidadeView extends javax.swing.JFrame {
     private void btnIncluirCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirCidadeActionPerformed
         // TODO add your handling code here:
         //PREENCHE O OBJETO CLIENTE
-            guardarDados();
+         /*   guardarDados();
 
             CidadeController objCidadeCon = new CidadeController(objCidade, null);
             try {
@@ -209,12 +209,12 @@ public class CadastroCidadeView extends javax.swing.JFrame {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
             }
 
-            limparTela();
+            limparTela();*/
     }//GEN-LAST:event_btnIncluirCidadeActionPerformed
 
     private void btnExcluirCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCidadeActionPerformed
         // TODO add your handling code here:
-        CidadeController objCidadeCon = new CidadeController(null, null);
+     /*   CidadeController objCidadeCon = new CidadeController(null, null);
         try {
             if (objCidadeCon.excluirCidade(objCidade) == true) {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Cidade removida com Sucesso!");
@@ -225,14 +225,14 @@ public class CadastroCidadeView extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
         }
         
-        limparTela();
+        limparTela();*/
     }//GEN-LAST:event_btnExcluirCidadeActionPerformed
 
     private void jtbCidadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbCidadesMouseClicked
         // TODO add your handling code here:
-        try {
+      /* try {
 
-            //pega a linha selecionada
+         //pega a linha selecionada
             int linhaSelecionada = jtbCidades.getSelectedRow();
             // Primeira coluna da linha
             String coluna1 = jtbCidades.getModel().getValueAt(linhaSelecionada, 0).toString();
@@ -245,11 +245,11 @@ public class CadastroCidadeView extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
-        }
+        }*/
     }//GEN-LAST:event_jtbCidadesMouseClicked
 
     private void preencheCampos() {
-        try {
+      /*  try {
             txtNomeCidade.setText(objCidade.getNmcidade());
             txtCep.setText(objCidade.getCep());
             txtUf.setText(objCidade.getUf());
@@ -268,9 +268,8 @@ public class CadastroCidadeView extends javax.swing.JFrame {
 
         }catch(Exception ex){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
-        }
+        }*/
     }
-    
     
     /**
      * @param args the command line arguments

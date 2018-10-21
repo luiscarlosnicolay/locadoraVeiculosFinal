@@ -165,7 +165,7 @@ public class ClienteController {
                 {
                     objCliente.setCodcliente(rs.getInt(1));
                     objCliente.setNmcliente(rs.getString(2));                                     
-                    objCliente.setCpfcnpj(rs.getString(3));
+                    objCliente.setCpfcnpj(rs.getInt(3));
                     objCliente.setTelefone(rs.getString(4));
                     objCliente.setEndereco(rs.getString(5));
                     objCliente.setCodcid(rs.getInt(6));
@@ -197,12 +197,13 @@ public class ClienteController {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO cliente (nmcliente, cpf_cnpj, telefone, endereco, dtnasc)VALUES(?,?,?,?,?)");
-            stmt.setString(1, objCliente.getNmcliente());
-            stmt.setString(2, objCliente.getCpfcnpj());
-            stmt.setString(3, objCliente.getTelefone());
-            stmt.setString(4, objCliente.getEndereco());
-            stmt.setDate(5, Date.valueOf(objCliente.getDtnasc()));
+            stmt = con.prepareStatement("INSERT INTO cliente (codcid, nmcliente, cpf_cnpj, telefone, endereco, dtnasc)VALUES(?,?,?,?,?,?)");
+            stmt.setInt(1, objCliente.getCodcid());
+            stmt.setString(2, objCliente.getNmcliente());
+            stmt.setInt(3, objCliente.getCpfcnpj());
+            stmt.setString(4, objCliente.getTelefone());
+            stmt.setString(5, objCliente.getEndereco());
+            stmt.setDate(6, Date.valueOf(objCliente.getDtnasc()));
             
             stmt.executeUpdate();
             
@@ -227,7 +228,7 @@ public class ClienteController {
             stmt = con.prepareStatement("UPDATE cliente SET nmcliente=?, cpf_cnpj=?, telefone=?, endereco=?, dtnasc=? WHERE codcliente=?");
             stmt.setInt(1, objCliente.getCodcliente());
             stmt.setString(2, objCliente.getNmcliente());
-            stmt.setString(3, objCliente.getCpfcnpj());
+            stmt.setInt(3, objCliente.getCpfcnpj());
             stmt.setString(4, objCliente.getTelefone());
             stmt.setString(5, objCliente.getEndereco());
             stmt.setDate(5, Date.valueOf(objCliente.getDtnasc()));

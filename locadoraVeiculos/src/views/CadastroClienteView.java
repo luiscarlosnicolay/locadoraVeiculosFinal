@@ -24,7 +24,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
      * Creates new form CadastrosView
      */
     
-    Combos cbCidade, cbEstado;
+    Combos cbCidade;
     Cliente objCliente;
     
     
@@ -37,9 +37,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
             //carregar os cursos existentes
             
-            
-            cbEstado = new Combos(jcbEstado);
-            cbEstado.PreencheCombo("SELECT uf, uf FROM cidade ORDER BY uf");
+            txtUf.setEditable(false);
+            cbCidade = new Combos(jcbCidade);
+            cbCidade.PreencheCombo("SELECT codcid, nmcidade FROM cidade ORDER BY nmcidade");
 
             //limparTela();
 
@@ -112,9 +112,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jtbClientes = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jcbEstado = new javax.swing.JComboBox<>();
         jcbCidade = new javax.swing.JComboBox<>();
         txtDtNasc = new javax.swing.JFormattedTextField();
+        txtUf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -182,13 +182,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabel9.setText("Estado:");
 
-        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
-        jcbEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbEstadoActionPerformed(evt);
-            }
-        });
-
         jcbCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -240,8 +233,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
@@ -268,7 +261,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel9)
-                        .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(txtCpfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,6 +285,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
@@ -356,7 +350,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             objCliente.setCpfcnpj(Integer.parseInt(txtCpfCnpj.getText()));
             txtTelefone.setText(objCliente.getTelefone());
             txtEndereco.setText(objCliente.getEndereco());
-            cbEstado.SetaComboBox(String.valueOf(objCliente.getUf()));
+            txtUf.setText(objCliente.getUf());
             cbCidade.SetaComboBox(String.valueOf(objCliente.getCodcid()));
 
             //Ajusta a data para DIA/MES/ANO
@@ -392,21 +386,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
         // TODO add your handling code here:
         limparTela();
     }//GEN-LAST:event_btnLimparTelaClienteActionPerformed
-
-    private void jcbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEstadoActionPerformed
-        try {
-            Combos c = new Combos();
-            if (jcbEstado.getSelectedIndex() > 0) {
-            c = (Combos) jcbEstado.getSelectedItem();
-            String estado = c.getCodigo();
-            
-            cbCidade = new Combos(jcbCidade);
-            cbCidade.PreencheCombo("SELECT codcid, nmcidade FROM cidade WHERE uf = '"+ estado +"' ORDER BY nmcidade");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CadastroClienteView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jcbEstadoActionPerformed
 
     private void guardarDados() {
         try {
@@ -500,12 +479,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JComboBox<String> jcbCidade;
-    private javax.swing.JComboBox<String> jcbEstado;
     private javax.swing.JTable jtbClientes;
     private javax.swing.JTextField txtCpfCnpj;
     private javax.swing.JFormattedTextField txtDtNasc;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
+    private javax.swing.JTextField txtUf;
     // End of variables declaration//GEN-END:variables
 }

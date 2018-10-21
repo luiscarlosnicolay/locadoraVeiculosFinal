@@ -14,7 +14,7 @@ public class Cliente {
     private int codcliente;
     private int codcid;
     private String nmcliente;
-    private String cpfcnpj;
+    private int cpfcnpj;
     private String telefone;
     private String endereco;
     private String dtnasc;
@@ -44,11 +44,11 @@ public class Cliente {
         this.nmcliente = nmcliente;
     }
 
-    public String getCpfcnpj() {
+    public int getCpfcnpj() {
         return cpfcnpj;
     }
 
-    public void setCpfcnpj(String cpfcnpj) {
+    public void setCpfcnpj(int cpfcnpj) {
         this.cpfcnpj = cpfcnpj;
     }
 
