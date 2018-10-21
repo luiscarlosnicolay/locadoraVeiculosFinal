@@ -78,8 +78,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jcbEstado" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtUf" min="-2" pref="65" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -114,7 +114,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jcbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUf" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -257,47 +257,6 @@
         <Property name="text" type="java.lang.String" value="Estado:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jcbEstado">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="27">
-            <StringItem index="0" value="AC"/>
-            <StringItem index="1" value="AL"/>
-            <StringItem index="2" value="AM"/>
-            <StringItem index="3" value="AP"/>
-            <StringItem index="4" value="BA"/>
-            <StringItem index="5" value="CE"/>
-            <StringItem index="6" value="DF"/>
-            <StringItem index="7" value="ES"/>
-            <StringItem index="8" value="GO"/>
-            <StringItem index="9" value="MA"/>
-            <StringItem index="10" value="MG"/>
-            <StringItem index="11" value="MS"/>
-            <StringItem index="12" value="MT"/>
-            <StringItem index="13" value="PA"/>
-            <StringItem index="14" value="PB"/>
-            <StringItem index="15" value="PE"/>
-            <StringItem index="16" value="PI"/>
-            <StringItem index="17" value="PR"/>
-            <StringItem index="18" value="RJ"/>
-            <StringItem index="19" value="RN"/>
-            <StringItem index="20" value="RO"/>
-            <StringItem index="21" value="RR"/>
-            <StringItem index="22" value="RS"/>
-            <StringItem index="23" value="SC"/>
-            <StringItem index="24" value="SE"/>
-            <StringItem index="25" value="SP"/>
-            <StringItem index="26" value="TO"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbEstadoActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JComboBox" name="jcbCidade">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -314,6 +273,8 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtDtNasc">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtUf">
     </Component>
   </SubComponents>
 </Form>
