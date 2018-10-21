@@ -164,7 +164,7 @@ public class LoginView extends javax.swing.JFrame {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Confira nome de usuário e/ou senha");
         } else{
             
-             TelaPrinciapal tp = new TelaPrinciapal();
+             TelaPrincipal tp = new TelaPrincipal();
              tp.setVisible(true);
              this.setVisible(false);
         }           

@@ -24,7 +24,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
      * Creates new form CadastrosView
      */
     
-    Combos cbCidade, cbEstado;
+    Combos cbCidade;
     Cliente objCliente;
     
     
@@ -38,8 +38,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
             //carregar os cursos existentes
             
             
-            cbEstado = new Combos(jcbEstado);
-            cbEstado.PreencheCombo("SELECT uf, uf FROM cidade ORDER BY uf");
+            cbCidade = new Combos(jcbEstado);
+            cbCidade.PreencheCombo("SELECT codcid, nmcidade FROM cidade ORDER BY nmcidade");
 
             limparTela();
 
@@ -63,7 +63,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         try {
             //LIMPAR OS CAMPOS DA TELA
             //LIBERAR O CAMPO MATRICULA
-            cbCidade.SetaComboBox("");
+            //cbCidade.SetaComboBox("");
             txtNome.setText("");
             txtCpfCnpj.setText("");
             txtDtNasc.setText("");
@@ -291,6 +291,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
@@ -357,7 +358,6 @@ public class CadastroClienteView extends javax.swing.JFrame {
             txtCpfCnpj.setText(objCliente.getCpfcnpj());
             txtTelefone.setText(objCliente.getTelefone());
             txtEndereco.setText(objCliente.getEndereco());
-            cbEstado.SetaComboBox(String.valueOf(objCliente.getUf()));
             cbCidade.SetaComboBox(String.valueOf(objCliente.getCodcid()));
 
             //Ajusta a data para DIA/MES/ANO
