@@ -41,7 +41,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             cbEstado = new Combos(jcbEstado);
             cbEstado.PreencheCombo("SELECT uf, uf FROM cidade ORDER BY uf");
 
-            limparTela();
+            //limparTela();
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
@@ -53,6 +53,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
             ClienteController clienteCon = new ClienteController(null, jtbClientes);
             clienteCon.PreencheClientes();
+            Formatacao.colocaMascara(txtDtNasc, "##/##/####");
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
@@ -103,7 +104,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtEndereco = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        btnInncluirCliente = new javax.swing.JButton();
+        btnIncluirCliente = new javax.swing.JButton();
         btnAlterarCliente = new javax.swing.JButton();
         btnExcluirCliente = new javax.swing.JButton();
         btnLimparTelaCliente = new javax.swing.JButton();
@@ -131,10 +132,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabel7.setText("Data de Nascimento:");
 
-        btnInncluirCliente.setText("Incluir");
-        btnInncluirCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnIncluirCliente.setText("Incluir");
+        btnIncluirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInncluirClienteActionPerformed(evt);
+                btnIncluirClienteActionPerformed(evt);
             }
         });
 
@@ -201,7 +202,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                     .addComponent(jSeparator1)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnInncluirCliente)
+                        .addComponent(btnIncluirCliente)
                         .addGap(18, 18, 18)
                         .addComponent(btnAlterarCliente)
                         .addGap(18, 18, 18)
@@ -283,7 +284,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInncluirCliente)
+                    .addComponent(btnIncluirCliente)
                     .addComponent(btnAlterarCliente)
                     .addComponent(btnExcluirCliente)
                     .addComponent(btnLimparTelaCliente))
@@ -314,26 +315,24 @@ public class CadastroClienteView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAlterarClienteActionPerformed
 
-    private void btnInncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInncluirClienteActionPerformed
+    private void btnIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirClienteActionPerformed
         // TODO add your handling code here:
-        /*//if (validarDados() == true) {
             //PREENCHE O OBJETO CLIENTE
             guardarDados();
 
             ClienteController objClienteCon = new ClienteController(objCliente, null);
             try {
-                if (objClienteCon.incluirCliente() == true) {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Aluno incluído com Sucesso!");
+                if (objClienteCon.incluirCliente(objCliente) == true) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Usuário incluído com Sucesso!");
                 } else {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir aluno!");
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir usuário!");
                 }
             } catch (Exception ex) {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
             }
 
             limparTela();
-       // }*/
-    }//GEN-LAST:event_btnInncluirClienteActionPerformed
+    }//GEN-LAST:event_btnIncluirClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
         // TODO add your handling code here:
@@ -354,7 +353,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private void preencheCampos() {
         try {
             txtNome.setText(objCliente.getNmcliente());
-            txtCpfCnpj.setText(objCliente.getCpfcnpj());
+            objCliente.setCpfcnpj(Integer.parseInt(txtCpfCnpj.getText()));
             txtTelefone.setText(objCliente.getTelefone());
             txtEndereco.setText(objCliente.getEndereco());
             cbEstado.SetaComboBox(String.valueOf(objCliente.getUf()));
@@ -413,7 +412,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         try {
             objCliente = new Cliente();
             objCliente.setNmcliente(txtNome.getText());
-            objCliente.setCpfcnpj(txtCpfCnpj.getText());
+            objCliente.setCpfcnpj(Integer.parseInt(txtCpfCnpj.getText()));
             objCliente.setTelefone(txtTelefone.getText());
             objCliente.setEndereco(txtEndereco.getText());
             
@@ -487,7 +486,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarCliente;
     private javax.swing.JButton btnExcluirCliente;
-    private javax.swing.JButton btnInncluirCliente;
+    private javax.swing.JButton btnIncluirCliente;
     private javax.swing.JButton btnLimparTelaCliente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
