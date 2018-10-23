@@ -78,17 +78,19 @@
                   <Component id="txtDescTipoPag" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnIncluirTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAlterarTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="btnExcluirTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnLimparCamposTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnIncluirTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAlterarTipoPagamento" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="147" max="-2" attributes="0"/>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -121,6 +123,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnIncluirTipoPagamento">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/sign-add.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Incluir"/>
       </Properties>
       <Events>
@@ -129,6 +134,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnExcluirTipoPagamento">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/sign-delete.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
       <Events>
@@ -137,6 +145,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnLimparCamposTipoPagamento">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/box.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Limpar"/>
       </Properties>
     </Component>
@@ -166,6 +177,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnAlterarTipoPagamento">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/icons/pencil.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>
       <Events>

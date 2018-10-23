@@ -149,9 +149,10 @@ public class ClienteController {
             ResultSet rs = null;
 
             String SQL = "";
-            SQL = " SELECT c.codcliente, c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, c.codcid, c.dtnasc ";
-            SQL += " FROM cliente c ";
+            SQL = " SELECT c.codcliente, c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, c.codcid, ci.uf, c.dtnasc ";
+            SQL += " FROM cliente c, cidade ci";
             SQL += " WHERE codcliente = '" + id + "'";
+            SQL += " AND c.codcid = ci.codcid ";
             //stm.executeQuery(SQL);
 
             try{
@@ -169,7 +170,8 @@ public class ClienteController {
                     objCliente.setTelefone(rs.getString(4));
                     objCliente.setEndereco(rs.getString(5));
                     objCliente.setCodcid(rs.getInt(6));
-                    objCliente.setDtnasc(String.valueOf(rs.getDate(7)));
+                    objCliente.setUf(rs.getString(7));
+                    objCliente.setDtnasc(String.valueOf(rs.getDate(8)));
                     
                 }
             }

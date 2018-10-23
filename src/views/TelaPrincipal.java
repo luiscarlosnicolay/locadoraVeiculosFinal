@@ -19,6 +19,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public TelaPrincipal() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,8 +43,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notepad.png"))); // NOI18N
         jMenu1.setText("Cadastros");
 
+        jMenuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/profile-group.png"))); // NOI18N
         jMenuClientes.setText("Clientes");
         jMenuClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +55,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuClientes);
 
+        jMenuCidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/map-map-marker.png"))); // NOI18N
         jMenuCidades.setText("Cidades");
         jMenuCidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +64,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuCidades);
 
+        jMenuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-male-alt.png"))); // NOI18N
         jMenuUsuarios.setText("Usuários");
         jMenuUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,6 +73,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuUsuarios);
 
+        jMenuTpPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/money.png"))); // NOI18N
         jMenuTpPagamento.setText("Tipos de Pagamento");
         jMenuTpPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +84,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-sync.png"))); // NOI18N
         jMenu2.setText("Movimentos");
 
         jMenuItem3.setText("Aluguéis");
@@ -90,8 +97,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-error.png"))); // NOI18N
         jMenuSair.setText("Sair");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-error.png"))); // NOI18N
         jMenuItem4.setText("Sair");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +121,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 451, Short.MAX_VALUE)
+            .addGap(0, 446, Short.MAX_VALUE)
         );
 
         pack();
@@ -190,6 +199,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

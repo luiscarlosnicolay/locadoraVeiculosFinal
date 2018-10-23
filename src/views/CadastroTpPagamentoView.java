@@ -89,6 +89,7 @@ public class CadastroTpPagamentoView extends javax.swing.JFrame {
 
         jLabel3.setText("Descrição:");
 
+        btnIncluirTipoPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-add.png"))); // NOI18N
         btnIncluirTipoPagamento.setText("Incluir");
         btnIncluirTipoPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +97,7 @@ public class CadastroTpPagamentoView extends javax.swing.JFrame {
             }
         });
 
+        btnExcluirTipoPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-delete.png"))); // NOI18N
         btnExcluirTipoPagamento.setText("Excluir");
         btnExcluirTipoPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +105,7 @@ public class CadastroTpPagamentoView extends javax.swing.JFrame {
             }
         });
 
+        btnLimparCamposTipoPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/box.png"))); // NOI18N
         btnLimparCamposTipoPagamento.setText("Limpar");
 
         jtbTpPagamento.setModel(new javax.swing.table.DefaultTableModel(
@@ -123,6 +126,7 @@ public class CadastroTpPagamentoView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtbTpPagamento);
 
+        btnAlterarTipoPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil.png"))); // NOI18N
         btnAlterarTipoPagamento.setText("Alterar");
         btnAlterarTipoPagamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,15 +184,16 @@ public class CadastroTpPagamentoView extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(txtDescTipoPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIncluirTipoPagamento)
-                    .addComponent(btnAlterarTipoPagamento)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnExcluirTipoPagamento)
-                        .addComponent(btnLimparCamposTipoPagamento)))
-                .addGap(78, 78, 78)
+                        .addComponent(btnLimparCamposTipoPagamento))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnIncluirTipoPagamento)
+                        .addComponent(btnAlterarTipoPagamento)))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();

@@ -133,6 +133,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jLabel7.setText("Data de Nascimento:");
 
+        btnIncluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-add.png"))); // NOI18N
         btnIncluirCliente.setText("Incluir");
         btnIncluirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +141,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             }
         });
 
+        btnAlterarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil.png"))); // NOI18N
         btnAlterarCliente.setText("Alterar");
         btnAlterarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +149,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             }
         });
 
+        btnExcluirCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-delete.png"))); // NOI18N
         btnExcluirCliente.setText("Excluir");
         btnExcluirCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +157,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             }
         });
 
+        btnLimparTelaCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/box.png"))); // NOI18N
         btnLimparTelaCliente.setText("Limpar");
         btnLimparTelaCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
