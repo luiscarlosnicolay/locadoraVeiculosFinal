@@ -71,6 +71,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
             txtTelefone.setText("");
             txtEndereco.setText("");
             txtDtNasc.setText("");
+            txtUf.setText("");
             
             //Formata o campo data de nascimento
             Formatacao.colocaMascara(txtDtNasc, "##/##/####");
@@ -347,7 +348,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private void preencheCampos() {
         try {
             txtNome.setText(objCliente.getNmcliente());
-            objCliente.setCpfcnpj(Integer.parseInt(txtCpfCnpj.getText()));
+            txtCpfCnpj.setText(objCliente.getCpfcnpj());
             txtTelefone.setText(objCliente.getTelefone());
             txtEndereco.setText(objCliente.getEndereco());
             txtUf.setText(objCliente.getUf());
@@ -388,10 +389,13 @@ public class CadastroClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparTelaClienteActionPerformed
 
     private void guardarDados() {
+        
         try {
-            objCliente = new Cliente();
+             if (objCliente == null) {
+                objCliente = new Cliente();
+            }
             objCliente.setNmcliente(txtNome.getText());
-            objCliente.setCpfcnpj(Integer.parseInt(txtCpfCnpj.getText()));
+            objCliente.setCpfcnpj(txtCpfCnpj.getText());
             objCliente.setTelefone(txtTelefone.getText());
             objCliente.setEndereco(txtEndereco.getText());
             
@@ -409,17 +413,22 @@ public class CadastroClienteView extends javax.swing.JFrame {
         }
     }
     
-    private boolean validarDados() {
+    /*private boolean validarDados() {
         try {
             //VALIDAR O CAMPOS DA TELA
             //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
-
+            txtNome.getText().length() == 0 ||
+            txtEndereco.getText().length() == 0 ||
+            txtDtNasc.getText().length() == 0 ||
+            txtCpfCnpj.getText().length() == 0 ||
+            txtTelefone.getText().length() == 0 ||
+            cbCidade.SetaComboBox.equals("");
             return true;
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
             return false;
         }
-    }
+    }*/
     /**
      * @param args the command line arguments
      */

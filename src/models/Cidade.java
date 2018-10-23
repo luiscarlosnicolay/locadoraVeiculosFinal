@@ -10,9 +10,6 @@ package models;
  * @author Windows
  */
 public class Cidade {
- * @author luis_
- */
-public class Cidade {
     
     private int codcid;
     private String nmcidade;
