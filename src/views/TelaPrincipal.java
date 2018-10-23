@@ -5,6 +5,8 @@
  */
 package views;
 
+import tools.CaixaDeDialogo;
+
 /**
  *
  * @author luis_
@@ -32,6 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuClientes = new javax.swing.JMenuItem();
         jMenuCidades = new javax.swing.JMenuItem();
         jMenuUsuarios = new javax.swing.JMenuItem();
+        jMenuTpPagamento = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
@@ -65,11 +68,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuUsuarios);
 
+        jMenuTpPagamento.setText("Tipos de Pagamento");
+        jMenuTpPagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuTpPagamentoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuTpPagamento);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Movimentos");
 
         jMenuItem3.setText("Aluguéis");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -126,6 +142,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         usuarioview.setVisible(true);
     }//GEN-LAST:event_jMenuUsuariosActionPerformed
 
+    private void jMenuTpPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuTpPagamentoActionPerformed
+        // TODO add your handling code here:
+        CadastroTpPagamentoView tppagamentoview = new CadastroTpPagamentoView();
+        tppagamentoview.setVisible(true);
+    }//GEN-LAST:event_jMenuTpPagamentoActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        CaixaDeDialogo.obterinstancia().exibirMensagem("Versão Demo, em breve versão de produção");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,6 +200,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu jMenuSair;
+    private javax.swing.JMenuItem jMenuTpPagamento;
     private javax.swing.JMenuItem jMenuUsuarios;
     // End of variables declaration//GEN-END:variables
 }

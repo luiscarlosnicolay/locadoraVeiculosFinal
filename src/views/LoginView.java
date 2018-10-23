@@ -57,6 +57,7 @@ public class LoginView extends javax.swing.JFrame {
         setTitle("Tela de Login");
 
         lblLogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
         lblLogin.setText("Usuário");
 
         txtUsuario.setToolTipText("Digite seu usuário");
@@ -67,6 +68,7 @@ public class LoginView extends javax.swing.JFrame {
         });
 
         lblSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblSenha.setForeground(new java.awt.Color(255, 255, 255));
         lblSenha.setText("Senha");
 
         txtSenha.setToolTipText("Digite sua senha");

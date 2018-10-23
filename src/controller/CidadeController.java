@@ -197,7 +197,8 @@ public class CidadeController {
             stmt = con.prepareStatement("UPDATE cidade SET nmcidade=?, cep=?, uf=? WHERE codcid=?");
             stmt.setString(1, objCidade.getNmcidade());
             stmt.setString(2, objCidade.getCep());
-            stmt.setString(3, objCidade.getUf());            
+            stmt.setString(3, objCidade.getUf());
+            stmt.setInt(4, objCidade.getCodcid());
  
             stmt.executeUpdate();
  

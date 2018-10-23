@@ -77,6 +77,7 @@ public class CadastroCidadeView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbCidades = new javax.swing.JTable();
         txtUf = new javax.swing.JTextField();
+        btnAlterarCidade = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -124,6 +125,13 @@ public class CadastroCidadeView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtbCidades);
 
+        btnAlterarCidade.setText("Alterar");
+        btnAlterarCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarCidadeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,9 +160,12 @@ public class CadastroCidadeView extends javax.swing.JFrame {
                                             .addComponent(txtUf))))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnIncluirCidade)
                                     .addComponent(btnExcluirCidade)
-                                    .addComponent(btnLimparCamposCidade))))
+                                    .addComponent(btnLimparCamposCidade)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnIncluirCidade)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnAlterarCidade)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -174,7 +185,8 @@ public class CadastroCidadeView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIncluirCidade))
+                    .addComponent(btnIncluirCidade)
+                    .addComponent(btnAlterarCidade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -248,6 +260,24 @@ public class CadastroCidadeView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jtbCidadesMouseClicked
 
+    private void btnAlterarCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarCidadeActionPerformed
+        // TODO add your handling code here:
+        guardarDados();
+
+            CidadeController objCidadeCon = new CidadeController(objCidade, null);
+            try {
+                if (objCidadeCon.alterarCidade() == true) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Cidade alterada com Sucesso!");
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar cidade!");
+                }
+            } catch (Exception ex) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            }
+
+            limparTela();
+    }//GEN-LAST:event_btnAlterarCidadeActionPerformed
+
     private void preencheCampos() {
         try {
             txtNomeCidade.setText(objCidade.getNmcidade());
@@ -261,7 +291,9 @@ public class CadastroCidadeView extends javax.swing.JFrame {
     
     private void guardarDados() {
         try {
-            objCidade = new Cidade();
+            if (objCidade == null) {
+                objCidade = new Cidade();
+            }
             objCidade.setNmcidade(txtNomeCidade.getText());
             objCidade.setCep(txtCep.getText());
             objCidade.setUf(txtUf.getText());
@@ -307,6 +339,7 @@ public class CadastroCidadeView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterarCidade;
     private javax.swing.JButton btnExcluirCidade;
     private javax.swing.JButton btnIncluirCidade;
     private javax.swing.JButton btnLimparCamposCidade;
