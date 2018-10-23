@@ -292,41 +292,56 @@ public class CadastroClienteView extends javax.swing.JFrame {
     private void btnAlterarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarClienteActionPerformed
         // TODO add your handling code here:
         try {
-            //if(validaDados()){
+            if(validarDados() == true){
 
-            guardarDados();
+                guardarDados();
 
-            ClienteController objClienteCon = new ClienteController(objCliente, null);
-            if (objClienteCon.alterarCliente() == true) {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Cliente alterado com Sucesso!");
-            } else {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("OPS! Erro ao alterar cliente, que pena!!!");
-            }
+                ClienteController objClienteCon = new ClienteController(objCliente, null);
+                
+                if (objClienteCon.alterarCliente() == true) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Cliente alterado com Sucesso!");
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar cliente!");
+                }
 
-            limparTela();
-            //}
-        } catch (Exception ex) {
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+                limparTela();
+                
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                    return;
+                }
+                
+            } catch (Exception ex) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnAlterarClienteActionPerformed
 
     private void btnIncluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirClienteActionPerformed
         // TODO add your handling code here:
             //PREENCHE O OBJETO CLIENTE
-            guardarDados();
-
-            ClienteController objClienteCon = new ClienteController(objCliente, null);
             try {
-                if (objClienteCon.incluirCliente(objCliente) == true) {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Usuário incluído com Sucesso!");
-                } else {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir usuário!");
-                }
-            } catch (Exception ex) {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
-            }
+                if(validarDados() == true){
 
-            limparTela();
+                    guardarDados();
+
+                    ClienteController objClienteCon = new ClienteController(objCliente, null);
+            
+                    if (objClienteCon.incluirCliente(objCliente) == true) {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Usuário incluído com Sucesso!");
+                    } else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir usuário!");
+                    }
+                    
+                    limparTela();
+                    
+                }else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                        return;
+                    }
+                } catch (Exception ex) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+                }
+
     }//GEN-LAST:event_btnIncluirClienteActionPerformed
 
     private void btnExcluirClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirClienteActionPerformed
@@ -413,22 +428,26 @@ public class CadastroClienteView extends javax.swing.JFrame {
         }
     }
     
-    /*private boolean validarDados() {
+    private boolean validarDados() {
         try {
             //VALIDAR O CAMPOS DA TELA
             //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
-            txtNome.getText().length() == 0 ||
-            txtEndereco.getText().length() == 0 ||
-            txtDtNasc.getText().length() == 0 ||
-            txtCpfCnpj.getText().length() == 0 ||
-            txtTelefone.getText().length() == 0 ||
-            cbCidade.SetaComboBox.equals("");
+           if( 
+            jcbCidade.getSelectedIndex() == 0 ||
+            txtNome.getText().equals("") ||
+            txtEndereco.getText().equals("") ||
+            txtDtNasc.getText().equals("") ||
+            txtCpfCnpj.getText().equals("") ||
+            txtTelefone.getText().equals("")) {
+            return false;
+           } else {
             return true;
+           }
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
             return false;
         }
-    }*/
+    }
     /**
      * @param args the command line arguments
      */

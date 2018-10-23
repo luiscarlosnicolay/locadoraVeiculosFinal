@@ -39,6 +39,7 @@ public class CidadeController {
         
         Vector<String> cabecalhos = new Vector<String>();
         Vector dadosTabela = new Vector();
+        cabecalhos.add("Código");
         cabecalhos.add("Nome");
         cabecalhos.add("CEP");
         cabecalhos.add("UF");
@@ -48,7 +49,7 @@ public class CidadeController {
         try{
             
             String SQL = "";
-            SQL = " SELECT ci.nmcidade, ci.cep, ci.uf ";
+            SQL = " SELECT ci.codcid, ci.nmcidade, ci.cep, ci.uf ";
             SQL += " FROM cidade ci ";
             SQL += " ORDER BY nmcidade ";
             
@@ -56,9 +57,10 @@ public class CidadeController {
             
             while (result.next()) {
                 Vector<Object> linha = new Vector<Object>();
-                linha.add(result.getString(1));
+                linha.add(result.getInt(1));
                 linha.add(result.getString(2));
                 linha.add(result.getString(3));
+                linha.add(result.getString(4));
                 
                 dadosTabela.add(linha);
             }
@@ -137,9 +139,10 @@ public class CidadeController {
                
                 if(rs.next() == true)
                 {
-                    objCidade.setNmcidade(rs.getString(1));
-                    objCidade.setCep(rs.getString(2));                                     
-                    objCidade.setUf(rs.getString(3));                   
+                    objCidade.setCodcid(rs.getInt(1));
+                    objCidade.setNmcidade(rs.getString(2));
+                    objCidade.setCep(rs.getString(3));                                     
+                    objCidade.setUf(rs.getString(4));                   
                 }
             }
 
