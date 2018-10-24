@@ -13,6 +13,7 @@ import models.Cliente;
 import tools.CaixaDeDialogo;
 import tools.Combos;
 import tools.Formatacao;
+import tools.Validacao;
 
 /**
  *
@@ -339,7 +340,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
                     limparTela();
                     
                 }else {
-                        CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                        //CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
                         return;
                     }
                 } catch (Exception ex) {
@@ -436,17 +437,48 @@ public class CadastroClienteView extends javax.swing.JFrame {
         try {
             //VALIDAR O CAMPOS DA TELA
             //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
-           if( 
-            jcbCidade.getSelectedIndex() == 0 ||
-            txtNome.getText().equals("") ||
-            txtEndereco.getText().equals("") ||
-            txtDtNasc.getText().equals("") ||
-            txtCpfCnpj.getText().equals("") ||
-            txtTelefone.getText().equals("")) {
-            return false;
-           } else {
+            if((txtNome.getText().trim().length()) < 50 && (txtNome.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Nome Incorreto", "Atenção", 'e');
+                return false;
+            }
+            if((txtEndereco.getText().trim().length()) < 50 && (txtEndereco.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Endereço maior que 50 caracteres", "Atenção", 'e');
+                return false;
+            }
+            if(txtDtNasc.getText().equals("")){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Data Inválida", "Atenção", 'e');
+                return false;
+            }
+            if(jcbCidade.getSelectedIndex() == 0){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Selecione uma Cidade", "Atenção", 'e');
+                return false;
+            }
+            
+            String wCodigo = txtCpfCnpj.getText().toString();
+            if(wCodigo.length() == 11){
+                Boolean wRet = Validacao.validarCPF(wCodigo);
+                if(wRet == false){
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("CPF incorreto", "Atenção", 'e');
+                    return false;
+                }
+            }else if(wCodigo.length() == 14){
+                Boolean wRet = Validacao.validarCNPJ(wCodigo);
+                if(wRet == false){
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("CNPJ incorreto", "Atenção", 'e');
+                    return false;
+                }
+            }else{
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Informe um CPF ou CNPJ correto", "Atenção", 'e');
+                return false;
+            }
+            if(Validacao.validarTelefone(txtTelefone)){
+                //sucesso
+                //return true;
+            }else{
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Atenção", "Telefone incorreto", 'e');
+                return false;
+            }
             return true;
-           }
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
             return false;

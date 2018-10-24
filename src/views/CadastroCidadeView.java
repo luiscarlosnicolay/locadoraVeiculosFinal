@@ -189,14 +189,15 @@ public class CadastroCidadeView extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtNomeCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluirCidade)
-                    .addComponent(btnLimparCamposCidade)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnIncluirCidade)
-                        .addComponent(btnAlterarCidade)))
+                        .addComponent(btnAlterarCidade))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExcluirCidade)
+                        .addComponent(btnLimparCamposCidade)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -212,20 +213,28 @@ public class CadastroCidadeView extends javax.swing.JFrame {
     private void btnIncluirCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirCidadeActionPerformed
         // TODO add your handling code here:
         //PREENCHE O OBJETO CLIENTE
-           guardarDados();
+        try {
+            if(validarDados() == true){
 
-            CidadeController objCidadeCon = new CidadeController(objCidade, null);
-            try {
-                if (objCidadeCon.incluirCidade(objCidade) == true) {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Cidade incluída com Sucesso!");
-                } else {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir cidade!");
-                }
-            } catch (Exception ex) {
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+                guardarDados();
+
+                CidadeController objCidadeCon = new CidadeController(objCidade, null);
+
+                    if (objCidadeCon.incluirCidade(objCidade) == true) {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Cidade incluída com Sucesso!");
+                    } else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir cidade!");
+                    }
+                    
+                    limparTela();
+                    
+                    } else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                        return;
+                    }
+                } catch (Exception ex) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
             }
-
-            limparTela();
     }//GEN-LAST:event_btnIncluirCidadeActionPerformed
 
     private void btnExcluirCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCidadeActionPerformed
@@ -266,20 +275,29 @@ public class CadastroCidadeView extends javax.swing.JFrame {
 
     private void btnAlterarCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarCidadeActionPerformed
         // TODO add your handling code here:
-        guardarDados();
+        try {
+            if(validarDados() == true) {
+
+            guardarDados();
 
             CidadeController objCidadeCon = new CidadeController(objCidade, null);
-            try {
+            
                 if (objCidadeCon.alterarCidade() == true) {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Cidade alterada com Sucesso!");
                 } else {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar cidade!");
                 }
+                
+                limparTela();
+                
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                    return;
+                }
+                
             } catch (Exception ex) {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
             }
-
-            limparTela();
     }//GEN-LAST:event_btnAlterarCidadeActionPerformed
 
     private void preencheCampos() {
@@ -304,6 +322,24 @@ public class CadastroCidadeView extends javax.swing.JFrame {
 
         }catch(Exception ex){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
+        }
+    }
+    
+    private boolean validarDados() {
+        try {
+            //VALIDAR O CAMPOS DA TELA
+            //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
+            if( 
+                txtNomeCidade.getText().equals("") ||
+                txtCep.getText().equals("") ||
+                txtUf.getText().equals("")) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            return false;
         }
     }
     

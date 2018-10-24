@@ -202,20 +202,29 @@ public class CadastroTpPagamentoView extends javax.swing.JFrame {
     private void btnIncluirTipoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirTipoPagamentoActionPerformed
         // TODO add your handling code here:
         //PREENCHE O OBJETO CLIENTE
-           guardarDados();
+        try {
+            if(validarDados() == true){
 
-            TpPagamentoController objTppagamentoCon = new TpPagamentoController(objTpPagamento, null);
-            try {
-                if (objTppagamentoCon.incluirTpPagamento(objTpPagamento) == true) {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Tipo de pagamento incluído com Sucesso!");
-                } else {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir tipo de pagamento!");
-                }
+            guardarDados();
+
+                TpPagamentoController objTppagamentoCon = new TpPagamentoController(objTpPagamento, null);
+
+                    if (objTppagamentoCon.incluirTpPagamento(objTpPagamento) == true) {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Tipo de pagamento incluído com Sucesso!");
+                    } else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir tipo de pagamento!");
+                    }
+                    
+                    limparTela();
+                    
+                    }else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                        return;
+                    }
+                    
             } catch (Exception ex) {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
-            }
-
-            limparTela();
+        }
     }//GEN-LAST:event_btnIncluirTipoPagamentoActionPerformed
 
     private void btnExcluirTipoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirTipoPagamentoActionPerformed
@@ -256,20 +265,28 @@ public class CadastroTpPagamentoView extends javax.swing.JFrame {
 
     private void btnAlterarTipoPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarTipoPagamentoActionPerformed
         // TODO add your handling code here:
-        guardarDados();
+        try {
+            if(validarDados() == true){
+            
+                guardarDados();
 
-            TpPagamentoController objTpPagamentoCon = new TpPagamentoController(objTpPagamento, null);
-            try {
+                TpPagamentoController objTpPagamentoCon = new TpPagamentoController(objTpPagamento, null);
+
                 if (objTpPagamentoCon.alterarTpPagamento()== true) {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Tipo de pagamento alterado com Sucesso!");
                 } else {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar tipo de pagamento!");
                 }
+                
+                limparTela();
+                
+                }else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                        return;
+                    }            
             } catch (Exception ex) {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
-            }
-
-            limparTela();
+        }
     }//GEN-LAST:event_btnAlterarTipoPagamentoActionPerformed
 
     private void preencheCampos() {
@@ -292,6 +309,23 @@ public class CadastroTpPagamentoView extends javax.swing.JFrame {
 
         }catch(Exception ex){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
+        }
+    }
+    
+    private boolean validarDados() {
+        try {
+            //VALIDAR O CAMPOS DA TELA
+            //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
+            if(
+                txtTipoPagamento.getText().equals("") ||
+                txtDescTipoPag.getText().equals("")) {
+                return false;
+            } else {
+                return true;
+           }
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            return false;
         }
     }
     

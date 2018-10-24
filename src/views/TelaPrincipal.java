@@ -30,21 +30,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuCadastros = new javax.swing.JMenu();
         jMenuClientes = new javax.swing.JMenuItem();
         jMenuCidades = new javax.swing.JMenuItem();
         jMenuUsuarios = new javax.swing.JMenuItem();
         jMenuTpPagamento = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuMovimentos = new javax.swing.JMenu();
+        jMenuItemAlugueis = new javax.swing.JMenuItem();
+        jMenuRelatorios = new javax.swing.JMenu();
+        jMenuItemRelClientes = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
+        jMenuItem1.setText("jMenuItem1");
+
+        jMenuItem2.setText("jMenuItem2");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notepad.png"))); // NOI18N
-        jMenu1.setText("Cadastros");
+        jMenuCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notepad.png"))); // NOI18N
+        jMenuCadastros.setText("Cadastros");
 
         jMenuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/profile-group.png"))); // NOI18N
         jMenuClientes.setText("Clientes");
@@ -53,7 +61,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jMenuClientesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuClientes);
+        jMenuCadastros.add(jMenuClientes);
 
         jMenuCidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/map-map-marker.png"))); // NOI18N
         jMenuCidades.setText("Cidades");
@@ -62,7 +70,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jMenuCidadesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuCidades);
+        jMenuCadastros.add(jMenuCidades);
 
         jMenuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-male-alt.png"))); // NOI18N
         jMenuUsuarios.setText("Usuários");
@@ -71,7 +79,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jMenuUsuariosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuUsuarios);
+        jMenuCadastros.add(jMenuUsuarios);
 
         jMenuTpPagamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/money.png"))); // NOI18N
         jMenuTpPagamento.setText("Tipos de Pagamento");
@@ -80,22 +88,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 jMenuTpPagamentoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuTpPagamento);
+        jMenuCadastros.add(jMenuTpPagamento);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuCadastros);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-sync.png"))); // NOI18N
-        jMenu2.setText("Movimentos");
+        jMenuMovimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-sync.png"))); // NOI18N
+        jMenuMovimentos.setText("Movimentos");
 
-        jMenuItem3.setText("Aluguéis");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemAlugueis.setText("Aluguéis");
+        jMenuItemAlugueis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuItemAlugueisActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenuMovimentos.add(jMenuItemAlugueis);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenuMovimentos);
+
+        jMenuRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file-bookmark.png"))); // NOI18N
+        jMenuRelatorios.setText("Relatórios");
+
+        jMenuItemRelClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file-pdf.png"))); // NOI18N
+        jMenuItemRelClientes.setText("Clientes");
+        jMenuItemRelClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelClientesActionPerformed(evt);
+            }
+        });
+        jMenuRelatorios.add(jMenuItemRelClientes);
+
+        jMenuBar1.add(jMenuRelatorios);
 
         jMenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-error.png"))); // NOI18N
         jMenuSair.setText("Sair");
@@ -121,7 +143,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 448, Short.MAX_VALUE)
         );
 
         pack();
@@ -157,10 +179,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tppagamentoview.setVisible(true);
     }//GEN-LAST:event_jMenuTpPagamentoActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItemAlugueisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlugueisActionPerformed
         // TODO add your handling code here:
         CaixaDeDialogo.obterinstancia().exibirMensagem("Versão Demo, em breve versão de produção");
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuItemAlugueisActionPerformed
+
+    private void jMenuItemRelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelClientesActionPerformed
+        // TODO add your handling code here:
+        CaixaDeDialogo.obterinstancia().exibirMensagem("Versão Demo, em breve versão de produção");
+    }//GEN-LAST:event_jMenuItemRelClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,13 +230,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuCidades;
     private javax.swing.JMenuItem jMenuClientes;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemAlugueis;
+    private javax.swing.JMenuItem jMenuItemRelClientes;
+    private javax.swing.JMenu jMenuMovimentos;
+    private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenuItem jMenuTpPagamento;
     private javax.swing.JMenuItem jMenuUsuarios;

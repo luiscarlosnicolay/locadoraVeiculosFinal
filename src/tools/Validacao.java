@@ -7,6 +7,7 @@ package tools;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -81,6 +82,14 @@ public class Validacao {
             return false;
         }else{
             return true;
+        }
+    }
+    
+    public static boolean validarTelefone(JTextField campo) {
+        if (campo.getText().trim().length() < 13) {
+            return true;
+        }else{
+            return false;
         }
     }
 }
