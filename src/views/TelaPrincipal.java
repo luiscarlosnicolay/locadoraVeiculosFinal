@@ -5,6 +5,14 @@
  */
 package views;
 
+import controller.ClienteController;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import tools.CaixaDeDialogo;
 
 /**
@@ -42,6 +50,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItemAlugueis = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
         jMenuItemRelClientes = new javax.swing.JMenuItem();
+        jMenuItemRelVeiculos = new javax.swing.JMenuItem();
+        jMenuItemCidades = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -117,6 +127,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuRelatorios.add(jMenuItemRelClientes);
 
+        jMenuItemRelVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file-pdf.png"))); // NOI18N
+        jMenuItemRelVeiculos.setText("Veículos");
+        jMenuRelatorios.add(jMenuItemRelVeiculos);
+
+        jMenuItemCidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file-pdf.png"))); // NOI18N
+        jMenuItemCidades.setText("Cidades");
+        jMenuRelatorios.add(jMenuItemCidades);
+
         jMenuBar1.add(jMenuRelatorios);
 
         jMenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-error.png"))); // NOI18N
@@ -186,7 +204,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemRelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelClientesActionPerformed
         // TODO add your handling code here:
-        CaixaDeDialogo.obterinstancia().exibirMensagem("Versão Demo, em breve versão de produção");
+        //CaixaDeDialogo.obterinstancia().exibirMensagem("Versão Demo, em breve versão de produção");
+        try{
+            
+            ClienteController objClienteCon = new ClienteController(null, null);
+            ResultSet resultSet = objClienteCon.relatorioClientes();//Buscar os dados do relatório
+            JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
+            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/relatorioClientes.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+            JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
+            jpViewer.setVisible(true);//abre o relatório para visualização
+            jpViewer.toFront();//define o form a frente da aplicação
+        
+        }catch(JRException ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');
+        }
     }//GEN-LAST:event_jMenuItemRelClientesActionPerformed
 
     /**
@@ -238,7 +269,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItemAlugueis;
+    private javax.swing.JMenuItem jMenuItemCidades;
     private javax.swing.JMenuItem jMenuItemRelClientes;
+    private javax.swing.JMenuItem jMenuItemRelVeiculos;
     private javax.swing.JMenu jMenuMovimentos;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuSair;

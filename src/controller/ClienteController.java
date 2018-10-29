@@ -272,4 +272,36 @@ public class ClienteController {
         }
         
     }
+    
+    public ResultSet relatorioClientes()
+    {
+        ResultSet rs = null;
+        try {
+            ConnectionFactory.abreConexao();
+            
+            String SQL = "";
+            SQL += " SELECT * ";
+            SQL += " from cliente c, cidade ci ";
+            SQL += " WHERE c.codcid = ci.codcid ";
+            SQL += " ORDER BY nmcliente ";
+
+            try{
+                System.out.println("Vai Executar Conexão em buscar visitante");
+                rs = ConnectionFactory.stmt.executeQuery(SQL);
+            }
+
+            catch (SQLException ex )
+            {
+                System.out.println("ERRO de SQL: " + ex.getMessage().toString());
+                return rs;
+            }
+
+        } catch (Exception e) {
+            System.out.println("ERRO: " + e.getMessage().toString());
+            return rs;
+        }
+        
+        System.out.println ("Executou buscar visitante com sucesso");
+        return rs;
+    }
 }
