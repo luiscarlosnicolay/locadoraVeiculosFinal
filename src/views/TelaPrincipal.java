@@ -204,20 +204,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemRelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelClientesActionPerformed
         // TODO add your handling code here:
-        //CaixaDeDialogo.obterinstancia().exibirMensagem("Versão Demo, em breve versão de produção");
-        try{
-            
-            ClienteController objClienteCon = new ClienteController(null, null);
-            ResultSet resultSet = objClienteCon.relatorioClientes();//Buscar os dados do relatório
-            JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
-            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/relatorioClientes.jasper", new HashMap(), relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
-            JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
-            jpViewer.setVisible(true);//abre o relatório para visualização
-            jpViewer.toFront();//define o form a frente da aplicação
-        
-        }catch(JRException ex){
-            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage(), 'e');
-        }
+        RelClientesView relclientesview = new RelClientesView();
+        relclientesview.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelClientesActionPerformed
 
     /**
