@@ -5,14 +5,6 @@
  */
 package views;
 
-import controller.ClienteController;
-import java.sql.ResultSet;
-import java.util.HashMap;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRResultSetDataSource;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.view.JasperViewer;
 import tools.CaixaDeDialogo;
 
 /**
@@ -133,6 +125,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItemCidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file-pdf.png"))); // NOI18N
         jMenuItemCidades.setText("Cidades");
+        jMenuItemCidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCidadesActionPerformed(evt);
+            }
+        });
         jMenuRelatorios.add(jMenuItemCidades);
 
         jMenuBar1.add(jMenuRelatorios);
@@ -207,6 +204,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         RelClientesView relclientesview = new RelClientesView();
         relclientesview.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelClientesActionPerformed
+
+    private void jMenuItemCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCidadesActionPerformed
+        // TODO add your handling code here:
+        RelCidadesView relcidadesview = new RelCidadesView();
+        relcidadesview.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCidadesActionPerformed
 
     /**
      * @param args the command line arguments
