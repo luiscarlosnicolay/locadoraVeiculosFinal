@@ -121,6 +121,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItemRelVeiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file-pdf.png"))); // NOI18N
         jMenuItemRelVeiculos.setText("Veículos");
+        jMenuItemRelVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRelVeiculosActionPerformed(evt);
+            }
+        });
         jMenuRelatorios.add(jMenuItemRelVeiculos);
 
         jMenuItemCidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/file-pdf.png"))); // NOI18N
@@ -210,6 +215,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         RelCidadesView relcidadesview = new RelCidadesView();
         relcidadesview.setVisible(true);
     }//GEN-LAST:event_jMenuItemCidadesActionPerformed
+
+    private void jMenuItemRelVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelVeiculosActionPerformed
+        // TODO add your handling code here:
+        RelVeiculosView relveiculosview = new RelVeiculosView();
+        relveiculosview.setVisible(true);
+    }//GEN-LAST:event_jMenuItemRelVeiculosActionPerformed
 
     /**
      * @param args the command line arguments

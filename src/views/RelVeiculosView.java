@@ -20,12 +20,12 @@ import tools.CaixaDeDialogo;
  *
  * @author luis_
  */
-public class RelCidadesView extends javax.swing.JFrame {
+public class RelVeiculosView extends javax.swing.JFrame {
 
     /**
-     * Creates new form RelCidades
+     * Creates new form RelVeiculos
      */
-    public RelCidadesView() {
+    public RelVeiculosView() {
         initComponents();
     }
 
@@ -40,20 +40,20 @@ public class RelCidadesView extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtUf = new javax.swing.JTextField();
+        txtKm = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Relatório de Cidades");
+        jLabel1.setText("Relatório de Veículos");
 
-        jLabel2.setText("UF:");
+        jLabel2.setText("KM:");
 
-        txtUf.addActionListener(new java.awt.event.ActionListener() {
+        txtKm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUfActionPerformed(evt);
+                txtKmActionPerformed(evt);
             }
         });
 
@@ -69,18 +69,18 @@ public class RelCidadesView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 162, Short.MAX_VALUE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(txtKm, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 159, Short.MAX_VALUE))
+                    .addComponent(jSeparator1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -90,11 +90,11 @@ public class RelCidadesView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
+                    .addComponent(txtKm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
                 .addComponent(btnPesquisar)
                 .addContainerGap())
         );
@@ -102,26 +102,27 @@ public class RelCidadesView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUfActionPerformed
+    private void txtKmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUfActionPerformed
+    }//GEN-LAST:event_txtKmActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
         try{
-            String wUf = txtUf.getText();
+            String wKm = txtKm.getText();
             
             Map<String, Object> parametros = new HashMap<String, Object>();
-            parametros.put("UF", wUf);
+            parametros.put("KM", wKm);
             
             RelatoriosController objRelatorioCon = new RelatoriosController();            
-            String wSQL = "SELECT ci.codcid, ci.nmcidade, ci.cep, ci.uf "
-                        + "FROM cidade ci "
-                        + "WHERE ci.uf = '"+ wUf +"' ";
+            String wSQL = "SELECT mv.nmmarca, v.modelo, v.ano, v.km, v.qtdeportas, v.cor, v.placa "
+                        + "FROM veiculo v, marcaveic mv "
+                        + "WHERE v.codmarca = mv.codmarca "
+                        + "AND v.km > '"+ wKm +"' ";
             
             ResultSet resultSet = objRelatorioCon.relatorioCidades(wSQL);//Buscar os dados do relatório
             JRResultSetDataSource relResult = new JRResultSetDataSource(resultSet);//Passa um resultSet para a fonte de dados do relatório
-            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/relatorioCidades.jasper", parametros, relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
+            JasperPrint jpPrint = JasperFillManager.fillReport("ireport/relatorioVeiculos.jasper", parametros, relResult);//Prepara o relatório para ser impresso, recebe o gerenciador JASPER
             JasperViewer jpViewer = new JasperViewer(jpPrint, false); //
             jpViewer.setVisible(true);//abre o relatório para visualização
             jpViewer.toFront();//define o form a frente da aplicação
@@ -148,13 +149,13 @@ public class RelCidadesView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelCidadesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelVeiculosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelCidadesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelVeiculosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelCidadesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelVeiculosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelCidadesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelVeiculosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -162,7 +163,7 @@ public class RelCidadesView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RelCidadesView().setVisible(true);
+                new RelVeiculosView().setVisible(true);
             }
         });
     }
@@ -172,6 +173,6 @@ public class RelCidadesView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txtUf;
+    private javax.swing.JTextField txtKm;
     // End of variables declaration//GEN-END:variables
 }

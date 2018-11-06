@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="uf" class="java.lang.String"/>
+	<parameter name="UF" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT ci.codcid, ci.nmcidade, ci.cep, ci.uf
 FROM cidade ci
@@ -32,7 +32,7 @@ ORDER BY nmcidade;]]>
 			</staticText>
 			<textField>
 				<reportElement x="76" y="59" width="100" height="20" uuid="cb08f385-4ed8-4994-8631-728baa135517"/>
-				<textFieldExpression><![CDATA[$F{uf}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{UF}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -43,15 +43,15 @@ ORDER BY nmcidade;]]>
 		<band height="61" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="2" width="209" height="20" uuid="f96f6a68-9681-4fd4-8a9d-801562c0ce5f"/>
-				<text><![CDATA[nmcidade]]></text>
+				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="209" y="2" width="100" height="20" uuid="3acdc2aa-e517-4eaa-9108-3e36e340ecae"/>
-				<text><![CDATA[cep]]></text>
+				<text><![CDATA[CEP]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="309" y="2" width="100" height="20" uuid="439c3010-da9f-42f6-aed1-d01274f63f4c"/>
-				<text><![CDATA[uf]]></text>
+				<text><![CDATA[UF]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioVeiculos" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cbeb0c08-916d-45b2-87cb-e01a09749877">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="1"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="KM" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT mv.nmmarca, v.modelo, v.ano, v.km, v.qtdeportas, v.cor, v.placa
+FROM veiculo v, marcaveic mv
+WHERE v.codmarca = mv.codmarca;]]>
+	</queryString>
+	<field name="nmmarca" class="java.lang.String"/>
+	<field name="modelo" class="java.lang.String"/>
+	<field name="ano" class="java.lang.Integer"/>
+	<field name="km" class="java.lang.Integer"/>
+	<field name="qtdeportas" class="java.lang.Integer"/>
+	<field name="cor" class="java.lang.String"/>
+	<field name="placa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="200" height="33" forecolor="#000000" backcolor="#FFFFFF" uuid="97e15413-732d-4874-81c2-57410dab037e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Relatório de Veiculos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="59" width="121" height="20" uuid="3363035a-1076-486f-96e8-2b2a776bbc4e"/>
+				<text><![CDATA[Veículos acima de  KM:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="121" y="59" width="100" height="20" uuid="3c9f0b5e-f9af-4215-bf47-81abd4ed0fa5"/>
+				<textFieldExpression><![CDATA[$P{KM}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" uuid="e209dea9-7f41-4d44-bec0-8ee2b5724ddc"/>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="100" height="20" uuid="63ef8c2c-d537-4230-8825-82ba082ba90b"/>
+				<text><![CDATA[Modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="2" width="100" height="20" uuid="b3e70303-ab35-4e2f-859f-c030e0b3a8fa"/>
+				<text><![CDATA[Ano]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="8b406b74-f5b3-4b56-9b37-a73814490cfc"/>
+				<text><![CDATA[KM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="2" width="100" height="20" uuid="5c3fa244-64a0-47d2-88fc-f8595d324a4b"/>
+				<text><![CDATA[Portas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="2" width="100" height="20" uuid="a65644c7-9635-4e00-8e59-3df30f5eaf00"/>
+				<text><![CDATA[Cor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="2" width="100" height="20" uuid="21b0339e-c722-4493-a7cf-0f3c58e3d923"/>
+				<text><![CDATA[Placa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e3eb1b44-49a3-45ee-beb0-ec46cb4a13c4"/>
+				<textFieldExpression><![CDATA[$F{nmmarca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="20" uuid="d7af2f94-aabf-4e01-abf5-571437af4d1b"/>
+				<textFieldExpression><![CDATA[$F{modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="62db9cc5-4581-40e0-9238-cef88b1ad740"/>
+				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="05434675-d371-49ac-b1ed-854d4ee70ccf"/>
+				<textFieldExpression><![CDATA[$F{km}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="c317ff0c-536c-49ab-84da-b3c810c6e83f"/>
+				<textFieldExpression><![CDATA[$F{qtdeportas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="100" height="20" uuid="39a6e071-036c-4039-948b-14cb3f445200"/>
+				<textFieldExpression><![CDATA[$F{cor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="20" uuid="76e285d6-f102-41c8-b508-fa6a388671d5"/>
+				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
