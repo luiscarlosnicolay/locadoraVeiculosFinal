@@ -5,10 +5,7 @@
  */
 package views;
 
-import controller.CidadeController;
-import controller.ClienteController;
 import controller.TpPagamentoController;
-import models.Cidade;
 import models.TpPagamento;
 import tools.CaixaDeDialogo;
 

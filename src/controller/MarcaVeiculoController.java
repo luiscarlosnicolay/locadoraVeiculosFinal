@@ -57,7 +57,6 @@ public class MarcaVeiculoController {
                 Vector<Object> linha = new Vector<Object>();
                 linha.add(result.getInt(1));
                 linha.add(result.getString(2));
-                linha.add(result.getString(3));
                 
                 dadosTabela.add(linha);
             }
@@ -80,7 +79,7 @@ public class MarcaVeiculoController {
         
         //Redimensiona as colunas de uma tabela
         TableColumn column = null;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             column = jtbMarcaVeiculo.getColumnModel().getColumn(i);
             switch (1) {
                 case 0:
@@ -118,14 +117,14 @@ public class MarcaVeiculoController {
             ResultSet rs = null;
 
             String SQL = "";
-            SQL = " SELECT SELECT mv.codmarca, mv.nmmarca ";
+            SQL = " SELECT mv.codmarca, mv.nmmarca ";
             SQL += " FROM marcaveic mv ";
             SQL += " WHERE codmarca = '" + id + "'";
 
             try{
                 System.out.println("Vai Executar Conexão em buscar visitante");
                 rs = ConnectionFactory.stmt.executeQuery(SQL);
-                System.out.println("Executou Conexão em buscar tipo de pagamento");
+                System.out.println("Executou Conexão em buscar Marca de Veículo");
                 
                objMarcaVeiculo = new MarcaVeiculo();
                
@@ -147,7 +146,7 @@ public class MarcaVeiculoController {
             return null;
         }
         
-        System.out.println ("Executou buscar tipo de pagamento com sucesso");
+        System.out.println ("Executou buscar Marca de Veículo com sucesso");
         return objMarcaVeiculo;
     }
     

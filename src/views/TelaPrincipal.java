@@ -38,6 +38,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuCidades = new javax.swing.JMenuItem();
         jMenuUsuarios = new javax.swing.JMenuItem();
         jMenuTpPagamento = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuMovimentos = new javax.swing.JMenu();
         jMenuItemAlugueis = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
@@ -91,6 +92,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(jMenuTpPagamento);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/layers.png"))); // NOI18N
+        jMenuItem3.setText("Marca de Veículo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItem3);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -222,6 +232,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         relveiculosview.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelVeiculosActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        CadastroMarcaVeiculoView cadastromarcaveiculoview = new CadastroMarcaVeiculoView();
+        cadastromarcaveiculoview.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -269,6 +285,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuClientes;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItemAlugueis;
     private javax.swing.JMenuItem jMenuItemCidades;

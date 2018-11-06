@@ -34,13 +34,24 @@ ORDER BY nmcidade;]]>
 				<reportElement x="76" y="59" width="100" height="20" uuid="cb08f385-4ed8-4994-8631-728baa135517"/>
 				<textFieldExpression><![CDATA[$P{UF}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="39" width="555" height="1" uuid="9820fea8-539d-448a-b605-e532cd1973c3"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="59" width="100" height="20" uuid="9f8ba78c-090c-42c0-b3fa-bc7ef28be644"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="18" width="555" height="1" uuid="7d295d1c-177d-4bb1-bb67-9ddad20ea51c"/>
+			</line>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="2" width="209" height="20" uuid="f96f6a68-9681-4fd4-8a9d-801562c0ce5f"/>
 				<text><![CDATA[Nome]]></text>
@@ -56,7 +67,7 @@ ORDER BY nmcidade;]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="209" height="20" uuid="3bbbdd1f-1440-4969-8143-82bb9c1f681d"/>
 				<textFieldExpression><![CDATA[$F{nmcidade}]]></textFieldExpression>

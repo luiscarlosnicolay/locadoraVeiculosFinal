@@ -119,6 +119,7 @@ public class CadastroMarcaVeiculoView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtbMarcaVeiculo);
 
+        btnIncluirMarcaVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-add.png"))); // NOI18N
         btnIncluirMarcaVeiculo.setText("Incluir");
         btnIncluirMarcaVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +127,7 @@ public class CadastroMarcaVeiculoView extends javax.swing.JFrame {
             }
         });
 
+        btnAlterarMarcaVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil.png"))); // NOI18N
         btnAlterarMarcaVeiculo.setText("Alterar");
         btnAlterarMarcaVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +135,7 @@ public class CadastroMarcaVeiculoView extends javax.swing.JFrame {
             }
         });
 
+        btnExcluirMarcaVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-delete.png"))); // NOI18N
         btnExcluirMarcaVeiculo.setText("Excluir");
         btnExcluirMarcaVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +143,7 @@ public class CadastroMarcaVeiculoView extends javax.swing.JFrame {
             }
         });
 
+        btnLimparMarcaVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/box.png"))); // NOI18N
         btnLimparMarcaVeiculo.setText("Limpar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,7 +199,7 @@ public class CadastroMarcaVeiculoView extends javax.swing.JFrame {
                     .addComponent(txtMarcaVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIncluirMarcaVeiculo)
                     .addComponent(btnAlterarMarcaVeiculo)
@@ -306,7 +310,7 @@ public class CadastroMarcaVeiculoView extends javax.swing.JFrame {
 
     private void preencheCampos() {
         try {
-            //txtCodigoMarcaVeiculo.setText(Integer.parseInt(objMarcaVeiculo.getCodmarca()));
+            txtCodigoMarcaVeiculo.setText(String.valueOf(objMarcaVeiculo.getCodmarca()));
             txtMarcaVeiculo.setText(objMarcaVeiculo.getNmmarrca());
 
         } catch (Exception ex) {

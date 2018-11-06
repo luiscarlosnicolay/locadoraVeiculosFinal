@@ -228,10 +228,7 @@ public class CadastroCidadeView extends javax.swing.JFrame {
                     
                     limparTela();
                     
-                    } else {
-                        CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
-                        return;
-                    }
+                    } 
                 } catch (Exception ex) {
                     CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
             }
@@ -290,9 +287,6 @@ public class CadastroCidadeView extends javax.swing.JFrame {
                 
                 limparTela();
                 
-                } else {
-                    CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
-                    return;
                 }
                 
             } catch (Exception ex) {
@@ -329,10 +323,16 @@ public class CadastroCidadeView extends javax.swing.JFrame {
         try {
             //VALIDAR O CAMPOS DA TELA
             //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
-            if( 
-                txtNomeCidade.getText().equals("") ||
-                txtCep.getText().equals("") ||
-                txtUf.getText().equals("")) {
+            if((txtNomeCidade.getText().trim().length()) < 40 && (txtNomeCidade.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Nome da Cidade com Problemas", "Atenção", 'e');
+                return false;
+            }
+            if((txtCep.getText().trim().length()) < 9 && (txtCep.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("CEP da Cidade com Problemas", "Atenção", 'e');
+                return false;
+            }
+            if((txtUf.getText().trim().length()) < 2 && (txtUf.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("UF da Cidade com Problemas", "Atenção", 'e');
                 return false;
             } else {
                 return true;

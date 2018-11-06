@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioClientes" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="352f211f-bc75-43a8-9ce5-e089b147bfdc">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="160"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="DATA_NASC" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT *
+		<![CDATA[SELECT c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, TO_CHAR(dtnasc, 'DD/MM/YYYY') AS dtnasc, ci.nmcidade, ci.cep, ci.uf
 FROM cliente c, cidade ci
 WHERE c.codcid = ci.codcid
 ORDER BY nmcliente;]]>
 	</queryString>
-	<field name="codcliente" class="java.lang.Integer"/>
-	<field name="codcid" class="java.lang.Integer"/>
 	<field name="nmcliente" class="java.lang.String"/>
 	<field name="cpf_cnpj" class="java.lang.String"/>
 	<field name="telefone" class="java.lang.String"/>
 	<field name="endereco" class="java.lang.String"/>
-	<field name="dtnasc" class="java.sql.Date"/>
+	<field name="dtnasc" class="java.lang.String"/>
 	<field name="nmcidade" class="java.lang.String"/>
 	<field name="cep" class="java.lang.String"/>
 	<field name="uf" class="java.lang.String"/>
@@ -40,10 +38,21 @@ ORDER BY nmcliente;]]>
 				<reportElement x="0" y="59" width="68" height="20" uuid="91e91bf5-a658-4391-b4e4-ba19bb86547e"/>
 				<text><![CDATA[Nascidos até:]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="43" width="802" height="1" uuid="6b1f020d-c299-4df6-8d5f-faf6f5f4265b"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="702" y="59" width="100" height="20" uuid="fae2a309-b190-466d-9bdb-bfc39361d924"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="15" width="802" height="1" uuid="b4893e97-3117-4fc9-b0ea-7bd4d2789dc5"/>
+			</line>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="24" splitType="Stretch">
@@ -52,31 +61,31 @@ ORDER BY nmcliente;]]>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="114" y="4" width="65" height="20" uuid="5aea1a25-2395-4ae5-95c7-778da74bb0ae"/>
+				<reportElement x="114" y="4" width="76" height="20" uuid="5aea1a25-2395-4ae5-95c7-778da74bb0ae"/>
 				<text><![CDATA[CPF/CNPF]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="179" y="4" width="73" height="20" uuid="fa55f4e2-cebd-4962-b9c0-9567674e0916"/>
+				<reportElement x="190" y="4" width="84" height="20" uuid="fa55f4e2-cebd-4962-b9c0-9567674e0916"/>
 				<text><![CDATA[Telefone]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="252" y="4" width="100" height="20" uuid="6d4deb4c-4516-4c1a-931c-c69677be2a69"/>
+				<reportElement x="274" y="4" width="100" height="20" uuid="6d4deb4c-4516-4c1a-931c-c69677be2a69"/>
 				<text><![CDATA[Endereço]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="352" y="4" width="90" height="20" uuid="71f919c4-7450-4263-a585-e7d0a78cdaba"/>
+				<reportElement x="374" y="4" width="90" height="20" uuid="71f919c4-7450-4263-a585-e7d0a78cdaba"/>
 				<text><![CDATA[Data de Nasc.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="442" y="4" width="63" height="20" uuid="fe8c1203-91a5-4589-9426-3458793df1b5"/>
+				<reportElement x="464" y="4" width="63" height="20" uuid="fe8c1203-91a5-4589-9426-3458793df1b5"/>
 				<text><![CDATA[Cidade]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="505" y="4" width="50" height="20" uuid="6d0e8db5-219e-4bb4-9e94-76ed7b981d7b"/>
+				<reportElement x="527" y="4" width="70" height="20" uuid="6d0e8db5-219e-4bb4-9e94-76ed7b981d7b"/>
 				<text><![CDATA[CEP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="555" y="4" width="73" height="20" uuid="3e9f5355-a8e9-4f3d-bef4-8e89d6695fbf"/>
+				<reportElement x="597" y="4" width="73" height="20" uuid="3e9f5355-a8e9-4f3d-bef4-8e89d6695fbf"/>
 				<text><![CDATA[UF]]></text>
 			</staticText>
 		</band>
@@ -88,31 +97,31 @@ ORDER BY nmcliente;]]>
 				<textFieldExpression><![CDATA[$F{nmcliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="114" y="6" width="65" height="20" uuid="7f3a11c0-8ef2-408a-90f4-3b3cccf7fdc7"/>
+				<reportElement x="114" y="6" width="76" height="20" uuid="7f3a11c0-8ef2-408a-90f4-3b3cccf7fdc7"/>
 				<textFieldExpression><![CDATA[$F{cpf_cnpj}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="179" y="6" width="73" height="20" uuid="347315c0-3b44-4534-bf30-4dbfc639aa55"/>
+				<reportElement x="190" y="6" width="84" height="20" uuid="347315c0-3b44-4534-bf30-4dbfc639aa55"/>
 				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="252" y="6" width="100" height="20" uuid="6a372094-b8e1-4125-a737-a7a82ea40a50"/>
+				<reportElement x="274" y="6" width="100" height="20" uuid="6a372094-b8e1-4125-a737-a7a82ea40a50"/>
 				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="352" y="6" width="90" height="20" uuid="abf6c631-cfea-44d5-beca-cb6d0c24f6a6"/>
+				<reportElement x="374" y="6" width="90" height="20" uuid="abf6c631-cfea-44d5-beca-cb6d0c24f6a6"/>
 				<textFieldExpression><![CDATA[$F{dtnasc}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="442" y="6" width="63" height="20" uuid="15e1f037-39bf-4a4c-acd6-6583362b9603"/>
+				<reportElement x="464" y="6" width="63" height="20" uuid="15e1f037-39bf-4a4c-acd6-6583362b9603"/>
 				<textFieldExpression><![CDATA[$F{nmcidade}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="505" y="6" width="50" height="20" uuid="18158e70-752d-411f-8e36-bb2408845628"/>
+				<reportElement x="527" y="6" width="70" height="20" uuid="18158e70-752d-411f-8e36-bb2408845628"/>
 				<textFieldExpression><![CDATA[$F{cep}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="555" y="6" width="73" height="20" uuid="d771639e-aa84-44bb-a738-8f79548e05ff"/>
+				<reportElement x="597" y="6" width="73" height="20" uuid="d771639e-aa84-44bb-a738-8f79548e05ff"/>
 				<textFieldExpression><![CDATA[$F{uf}]]></textFieldExpression>
 			</textField>
 		</band>

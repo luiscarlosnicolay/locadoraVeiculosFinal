@@ -116,7 +116,7 @@ public class RelClientesView extends javax.swing.JFrame {
             parametros.put("DATA_NASC", wDataModelo);
             
             RelatoriosController objRelatorioCon = new RelatoriosController();            
-            String wSQL = "SELECT * "
+            String wSQL = "SELECT c.nmcliente, c.cpf_cnpj, c.telefone, c.endereco, TO_CHAR(dtnasc, 'DD/MM/YYYY') AS dtnasc, ci.nmcidade, ci.cep, ci.uf "
                         + "FROM cliente c, cidade ci "
                         + "WHERE c.codcid = ci.codcid "
                         + "AND dtnasc < '"+ wDataModelo +"' "

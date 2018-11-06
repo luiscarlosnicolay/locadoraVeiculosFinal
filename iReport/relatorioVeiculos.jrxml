@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioVeiculos" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cbeb0c08-916d-45b2-87cb-e01a09749877">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="1"/>
+	<property name="ireport.x" value="160"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="KM" class="java.lang.String"/>
 	<queryString language="SQL">
@@ -37,13 +37,24 @@ WHERE v.codmarca = mv.codmarca;]]>
 				<reportElement x="121" y="59" width="100" height="20" uuid="3c9f0b5e-f9af-4215-bf47-81abd4ed0fa5"/>
 				<textFieldExpression><![CDATA[$P{KM}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="0" y="46" width="802" height="1" uuid="ae14a2e6-c2f2-403d-9e40-64ff194230f4"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="700" y="59" width="100" height="20" uuid="c0d0d5f4-1059-4359-913a-a3fd52d1e3fd"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="16" width="802" height="1" uuid="b4ac123f-0c6c-4469-b474-dd6680030880"/>
+			</line>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="33" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="2" width="100" height="20" uuid="e209dea9-7f41-4d44-bec0-8ee2b5724ddc"/>
 				<text><![CDATA[Marca]]></text>
@@ -75,7 +86,7 @@ WHERE v.codmarca = mv.codmarca;]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="38" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="e3eb1b44-49a3-45ee-beb0-ec46cb4a13c4"/>
 				<textFieldExpression><![CDATA[$F{nmmarca}]]></textFieldExpression>
