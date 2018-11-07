@@ -32,6 +32,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         jMenuClientes = new javax.swing.JMenuItem();
@@ -46,13 +47,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItemRelVeiculos = new javax.swing.JMenuItem();
         jMenuItemCidades = new javax.swing.JMenuItem();
         jMenuSair = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItemSair = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/Carros disney 3.gif"))); // NOI18N
 
         jMenuCadastros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notepad.png"))); // NOI18N
         jMenuCadastros.setText("Cadastros");
@@ -152,14 +155,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-error.png"))); // NOI18N
         jMenuSair.setText("Sair");
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-error.png"))); // NOI18N
-        jMenuItem4.setText("Sair");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-error.png"))); // NOI18N
+        jMenuItemSair.setText("Sair");
+        jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItemSairActionPerformed(evt);
             }
         });
-        jMenuSair.add(jMenuItem4);
+        jMenuSair.add(jMenuItemSair);
 
         jMenuBar1.add(jMenuSair);
 
@@ -169,11 +172,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 632, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(362, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(286, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
 
         pack();
@@ -186,10 +195,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         cadastrocidade.setVisible(true);
     }//GEN-LAST:event_jMenuCidadesActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jMenuItemSairActionPerformed
 
     private void jMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuClientesActionPerformed
         // TODO add your handling code here:
@@ -279,6 +288,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuCidades;
@@ -286,11 +296,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItemAlugueis;
     private javax.swing.JMenuItem jMenuItemCidades;
     private javax.swing.JMenuItem jMenuItemRelClientes;
     private javax.swing.JMenuItem jMenuItemRelVeiculos;
+    private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenu jMenuMovimentos;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuSair;
