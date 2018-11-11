@@ -148,6 +148,7 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtbVeiculos);
 
+        btnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-add.png"))); // NOI18N
         btnIncluir.setText("Incluir");
         btnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,6 +156,7 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
             }
         });
 
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil.png"))); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,6 +164,7 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
             }
         });
 
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-delete.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +172,7 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
             }
         });
 
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/box.png"))); // NOI18N
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -391,17 +395,17 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
              if (objVeiculo == null) {
                 objVeiculo = new Veiculo();
             }
-            /*objVeiculo.setModelo(txtModeloVeiculo.getText());
-            objVeiculo.setAno(Integer.parseInt(txtAnoVeiculo.getText));
-            objVeiculo.setKm(txtKmVeiculo.getText());
-            objVeiculo.setQtdeportas(txtQtdePortas.getText());
+            objVeiculo.setModelo(txtModeloVeiculo.getText());
+            objVeiculo.setAno(Integer.parseInt(txtAnoVeiculo.getText()));
+            objVeiculo.setKm(Integer.parseInt(txtKmVeiculo.getText()));
+            objVeiculo.setQtdeportas(Integer.parseInt(txtQtdePortas.getText()));
             objVeiculo.setCor(txtCorVeiculo.getText());
             objVeiculo.setPlaca(txtPlaca.getText());
             
             //RECUPERANDO A CIDADE DO CLIENTE
             Combos c = (Combos) jcbMarcaVeiculo.getSelectedItem();
-            String codigoVeiculo = c.getCodigo();
-            objVeiculo.setCodveic(Integer.parseInt(codigoVeiculo));*/
+            String codigoMarca = c.getCodigo();
+            objVeiculo.setCodmarca(Integer.parseInt(codigoMarca));
 
         }catch(Exception ex){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());

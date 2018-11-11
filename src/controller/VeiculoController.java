@@ -227,13 +227,14 @@ public class VeiculoController {
  
         try {
             stmt = con.prepareStatement("UPDATE veiculo SET codmarca=?, modelo=?, ano=?, km=?, qtdeportas=?, cor=?, placa=? WHERE codveic=?");
-            stmt.setString(1, objVeiculo.getModelo());
-            stmt.setInt(2, objVeiculo.getAno());
-            stmt.setInt(3, objVeiculo.getKm());
-            stmt.setInt(4, objVeiculo.getQtdeportas());
-            stmt.setString(5, objVeiculo.getCor());
-            stmt.setString(6, objVeiculo.getPlaca());
-            stmt.setInt(7, objVeiculo.getCodveic());
+            stmt.setInt(1, objVeiculo.getCodmarca());
+            stmt.setString(2, objVeiculo.getModelo());
+            stmt.setInt(3, objVeiculo.getAno());
+            stmt.setInt(4, objVeiculo.getKm());
+            stmt.setInt(5, objVeiculo.getQtdeportas());
+            stmt.setString(6, objVeiculo.getCor());
+            stmt.setString(7, objVeiculo.getPlaca());
+            stmt.setInt(8, objVeiculo.getCodveic());
             
  
             stmt.executeUpdate();
