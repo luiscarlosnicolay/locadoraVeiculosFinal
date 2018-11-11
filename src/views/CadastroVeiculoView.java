@@ -395,12 +395,12 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
              if (objVeiculo == null) {
                 objVeiculo = new Veiculo();
             }
-            objVeiculo.setModelo(txtModeloVeiculo.getText());
+            objVeiculo.setModelo(txtModeloVeiculo.getText().toUpperCase());
             objVeiculo.setAno(Integer.parseInt(txtAnoVeiculo.getText()));
             objVeiculo.setKm(Integer.parseInt(txtKmVeiculo.getText()));
             objVeiculo.setQtdeportas(Integer.parseInt(txtQtdePortas.getText()));
-            objVeiculo.setCor(txtCorVeiculo.getText());
-            objVeiculo.setPlaca(txtPlaca.getText());
+            objVeiculo.setCor(txtCorVeiculo.getText().toUpperCase());
+            objVeiculo.setPlaca(txtPlaca.getText().toUpperCase());
             
             //RECUPERANDO A CIDADE DO CLIENTE
             Combos c = (Combos) jcbMarcaVeiculo.getSelectedItem();
@@ -415,7 +415,11 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
     private boolean validarDados() {
         try {
             //VALIDAR O CAMPOS DA TELA
-            //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
+            //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE            
+            if(jcbMarcaVeiculo.getSelectedIndex() == 0){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Selecione uma Marca", "Atenção", 'e');
+                return false;
+            }
             if((txtModeloVeiculo.getText().trim().length()) < 50 && (txtModeloVeiculo.getText().trim().equals(""))){
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Modelo incorreto", "Atenção", 'e');
                 return false;
@@ -428,7 +432,7 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
                 CaixaDeDialogo.obterinstancia().exibirMensagem("KM incorreta", "Atenção", 'e');
                 return false;
             }
-            if((txtQtdePortas.getText().trim().length()) < 1 && (txtAnoVeiculo.getText().trim().equals(""))){
+            if((txtQtdePortas.getText().trim().length()) < 2 && (txtAnoVeiculo.getText().trim().equals(""))){
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Quantidade de Portas incompatíveis", "Atenção", 'e');
                 return false;
             }
@@ -438,10 +442,6 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
             }
             if((txtPlaca.getText().trim().length()) < 7 && (txtPlaca.getText().trim().equals(""))){
                 CaixaDeDialogo.obterinstancia().exibirMensagem("Placa Incorreta", "Atenção", 'e');
-                return false;
-            }
-            if(jcbMarcaVeiculo.getSelectedIndex() == 0){
-                CaixaDeDialogo.obterinstancia().exibirMensagem("Selecione uma Marca", "Atenção", 'e');
                 return false;
             }
             return true;
