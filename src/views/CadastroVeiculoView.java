@@ -5,17 +5,69 @@
  */
 package views;
 
+import controller.VeiculoController;
+import models.Veiculo;
+import tools.CaixaDeDialogo;
+import tools.Combos;
+import tools.Formatacao;
+
 /**
  *
  * @author luis_
  */
 public class CadastroVeiculoView extends javax.swing.JFrame {
+    
+    Combos cbMarcaVeiculo;
+    Veiculo objVeiculo;
 
     /**
      * Creates new form CadastroVeiculoController
      */
     public CadastroVeiculoView() {
         initComponents();
+        
+        try {
+
+            atualizarTabela();
+
+
+            cbMarcaVeiculo = new Combos(jcbMarcaVeiculo);
+            cbMarcaVeiculo.PreencheCombo("SELECT codmarca, nmmarca FROM marcaveic ORDER BY nmmarca");
+
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+        
+    }
+    
+    private void atualizarTabela() {
+        try {
+
+            VeiculoController veiculoCon = new VeiculoController(null, jtbVeiculos);
+            veiculoCon.PreencheVeiculos();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
+    
+    private void limparTela() {
+        try {
+            //LIMPAR OS CAMPOS DA TELA
+            cbMarcaVeiculo.SetaComboBox("");
+            txtModeloVeiculo.setText("");
+            txtAnoVeiculo.setText("");
+            txtKmVeiculo.setText("");
+            txtQtdePortas.setText("");
+            txtCorVeiculo.setText("");
+            txtPlaca.setText("");
+            
+            atualizarTabela();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
     }
 
     /**
@@ -42,7 +94,7 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtCorVeiculo = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtPlaca = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbVeiculos = new javax.swing.JTable();
         btnIncluir = new javax.swing.JButton();
@@ -89,15 +141,40 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbVeiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbVeiculosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbVeiculos);
 
         btnIncluir.setText("Incluir");
+        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,7 +217,7 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2)))
+                                        .addComponent(txtPlaca)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtKmVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -180,7 +257,7 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtCorVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -199,6 +276,177 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModeloVeiculoActionPerformed
 
+    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
+        // TODO add your handling code here:
+        try {
+                if(validarDados() == true){
+
+                    guardarDados();
+
+                    VeiculoController objVeiculoCon = new VeiculoController(objVeiculo, null);
+            
+                    if (objVeiculoCon.incluirVeiculo(objVeiculo) == true) {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Veículo incluído com Sucesso!");
+                    } else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir Veículo!");
+                    }
+                    
+                    limparTela();
+                    
+                }else {
+                        return;
+                    }
+                } catch (Exception ex) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+                }
+    }//GEN-LAST:event_btnIncluirActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+        try {
+            if(validarDados() == true){
+
+                guardarDados();
+
+                VeiculoController objVeiculoCon = new VeiculoController(objVeiculo, null);
+                
+                if (objVeiculoCon.alterarVeiculo()== true) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Veículo alterado com Sucesso!");
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar Veículo!");
+                }
+
+                limparTela();
+                
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                    return;
+                }
+                
+            } catch (Exception ex) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        VeiculoController objVeiculoCon = new VeiculoController(null, null);
+        try {
+            if (objVeiculoCon.excluirVeiculo(objVeiculo) == true) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Veículo removido com Sucesso!");
+            } else {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao remover Veículo!");
+            }
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+        
+        limparTela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void jtbVeiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbVeiculosMouseClicked
+        // TODO add your handling code here:
+        try {
+
+            //pega a linha selecionada
+            int linhaSelecionada = jtbVeiculos.getSelectedRow();
+            // Primeira coluna da linha
+            String coluna1 = jtbVeiculos.getModel().getValueAt(linhaSelecionada, 0).toString();
+
+            //basta agora chamar o método buscar, passando o COLUNA1 como parâmetro de consulta
+            VeiculoController objClienteCon = new VeiculoController(null, null);
+            objVeiculo = objClienteCon.buscarVeiculos(coluna1);
+
+            preencheCampos();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jtbVeiculosMouseClicked
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        limparTela();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void preencheCampos() {
+        try {
+            
+            cbMarcaVeiculo.SetaComboBox(String.valueOf(objVeiculo.getCodmarca()));
+            txtModeloVeiculo.setText(objVeiculo.getModelo());
+            txtAnoVeiculo.setText(String.valueOf(objVeiculo.getAno()));
+            txtKmVeiculo.setText(String.valueOf(objVeiculo.getKm()));
+            txtQtdePortas.setText(String.valueOf(objVeiculo.getQtdeportas()));
+            txtCorVeiculo.setText(objVeiculo.getCor());
+            txtPlaca.setText(objVeiculo.getPlaca());
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }
+    
+    private void guardarDados() {
+        
+        try {
+             if (objVeiculo == null) {
+                objVeiculo = new Veiculo();
+            }
+            /*objVeiculo.setModelo(txtModeloVeiculo.getText());
+            objVeiculo.setAno(Integer.parseInt(txtAnoVeiculo.getText));
+            objVeiculo.setKm(txtKmVeiculo.getText());
+            objVeiculo.setQtdeportas(txtQtdePortas.getText());
+            objVeiculo.setCor(txtCorVeiculo.getText());
+            objVeiculo.setPlaca(txtPlaca.getText());
+            
+            //RECUPERANDO A CIDADE DO CLIENTE
+            Combos c = (Combos) jcbMarcaVeiculo.getSelectedItem();
+            String codigoVeiculo = c.getCodigo();
+            objVeiculo.setCodveic(Integer.parseInt(codigoVeiculo));*/
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
+        }
+    }
+    
+    private boolean validarDados() {
+        try {
+            //VALIDAR O CAMPOS DA TELA
+            //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
+            if((txtModeloVeiculo.getText().trim().length()) < 50 && (txtModeloVeiculo.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Modelo incorreto", "Atenção", 'e');
+                return false;
+            }
+            if((txtAnoVeiculo.getText().trim().length()) < 4 && (txtAnoVeiculo.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Ano Incorreto", "Atenção", 'e');
+                return false;
+            }
+            if(txtKmVeiculo.getText().trim().equals("")){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("KM incorreta", "Atenção", 'e');
+                return false;
+            }
+            if((txtQtdePortas.getText().trim().length()) < 1 && (txtAnoVeiculo.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Quantidade de Portas incompatíveis", "Atenção", 'e');
+                return false;
+            }
+            if((txtCorVeiculo.getText().trim().length()) < 20 && (txtCorVeiculo.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Cor Incorreta", "Atenção", 'e');
+                return false;
+            }
+            if((txtPlaca.getText().trim().length()) < 7 && (txtPlaca.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Placa Incorreta", "Atenção", 'e');
+                return false;
+            }
+            if(jcbMarcaVeiculo.getSelectedIndex() == 0){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Selecione uma Marca", "Atenção", 'e');
+                return false;
+            }
+            return true;
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            return false;
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -250,13 +498,13 @@ public class CadastroVeiculoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JComboBox<String> jcbMarcaVeiculo;
     private javax.swing.JTable jtbVeiculos;
     private javax.swing.JTextField txtAnoVeiculo;
     private javax.swing.JTextField txtCorVeiculo;
     private javax.swing.JTextField txtKmVeiculo;
     private javax.swing.JTextField txtModeloVeiculo;
+    private javax.swing.JTextField txtPlaca;
     private javax.swing.JTextField txtQtdePortas;
     // End of variables declaration//GEN-END:variables
 }

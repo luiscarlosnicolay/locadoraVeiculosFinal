@@ -33,7 +33,7 @@ public class VeiculoController {
         this.jtbVeiculos = jtbVeiculos;
     }
     
-    public void PreencheClientes() {
+    public void PreencheVeiculos() {
         
         ConnectionFactory.abreConexao();
         
@@ -148,7 +148,7 @@ public class VeiculoController {
             ResultSet rs = null;
 
             String SQL = "";
-            SQL = " SELECT  v.codveic, m.nmmarca, v.modelo, v.ano, v.km, v.qtdeportas, v.cor, v.placa ";
+            SQL = " SELECT  v.codveic, m.codmarca, v.modelo, v.ano, v.km, v.qtdeportas, v.cor, v.placa ";
             SQL += " FROM veiculo v, marcaveic m ";
             SQL += " WHERE codveic = '" + id + "'";
             SQL += " AND v.codmarca = m.codmarca ";
@@ -205,6 +205,60 @@ public class VeiculoController {
             stmt.setInt(5, objVeiculo.getQtdeportas());
             stmt.setString(6, objVeiculo.getCor());
             stmt.setString(7, objVeiculo.getPlaca());
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
+    }
+    
+    public boolean alterarVeiculo(){
+ 
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+ 
+        try {
+            stmt = con.prepareStatement("UPDATE veiculo SET codmarca=?, modelo=?, ano=?, km=?, qtdeportas=?, cor=?, placa=? WHERE codveic=?");
+            stmt.setString(1, objVeiculo.getModelo());
+            stmt.setInt(2, objVeiculo.getAno());
+            stmt.setInt(3, objVeiculo.getKm());
+            stmt.setInt(4, objVeiculo.getQtdeportas());
+            stmt.setString(5, objVeiculo.getCor());
+            stmt.setString(6, objVeiculo.getPlaca());
+            stmt.setInt(7, objVeiculo.getCodveic());
+            
+ 
+            stmt.executeUpdate();
+ 
+            return true;
+ 
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+ 
+    }
+    
+    public boolean excluirVeiculo(Veiculo objVeiculo){      
+        
+        
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("DELETE FROM veiculo WHERE codveic = ? ");
+            stmt.setInt(1, objVeiculo.getCodveic());
             
             stmt.executeUpdate();
             

@@ -332,9 +332,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
                     ClienteController objClienteCon = new ClienteController(objCliente, null);
             
                     if (objClienteCon.incluirCliente(objCliente) == true) {
-                        CaixaDeDialogo.obterinstancia().exibirMensagem("Usuário incluído com Sucesso!");
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Cliente incluído com Sucesso!");
                     } else {
-                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir usuário!");
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir Cliente!");
                     }
                     
                     limparTela();
