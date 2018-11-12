@@ -36,10 +36,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         jMenuClientes = new javax.swing.JMenuItem();
+        jMenuVeiculos = new javax.swing.JMenuItem();
         jMenuCidades = new javax.swing.JMenuItem();
         jMenuUsuarios = new javax.swing.JMenuItem();
         jMenuTpPagamento = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuMarcaVeiculo = new javax.swing.JMenuItem();
         jMenuMovimentos = new javax.swing.JMenu();
         jMenuItemAlugueis = new javax.swing.JMenuItem();
         jMenuRelatorios = new javax.swing.JMenu();
@@ -53,7 +54,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuItem2.setText("jMenuItem2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gifs/Carros disney 3.gif"))); // NOI18N
 
@@ -68,6 +69,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(jMenuClientes);
+
+        jMenuVeiculos.setText("Veículos");
+        jMenuVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuVeiculosActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuVeiculos);
 
         jMenuCidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/map-map-marker.png"))); // NOI18N
         jMenuCidades.setText("Cidades");
@@ -96,20 +105,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuTpPagamento);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/layers.png"))); // NOI18N
-        jMenuItem3.setText("Marca de Veículo");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuMarcaVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/layers.png"))); // NOI18N
+        jMenuMarcaVeiculo.setText("Marca de Veículo");
+        jMenuMarcaVeiculo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuMarcaVeiculoActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItem3);
+        jMenuCadastros.add(jMenuMarcaVeiculo);
 
         jMenuBar1.add(jMenuCadastros);
 
         jMenuMovimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-sync.png"))); // NOI18N
         jMenuMovimentos.setText("Movimentos");
 
+        jMenuItemAlugueis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/book-bookmark.png"))); // NOI18N
         jMenuItemAlugueis.setText("Aluguéis");
         jMenuItemAlugueis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,7 +230,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemAlugueisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlugueisActionPerformed
         // TODO add your handling code here:
-        CaixaDeDialogo.obterinstancia().exibirMensagem("Versão Demo, em breve versão de produção");
+        CadastroAluguelView cadastroaluguelview = new CadastroAluguelView();
+        cadastroaluguelview.setVisible(true);
     }//GEN-LAST:event_jMenuItemAlugueisActionPerformed
 
     private void jMenuItemRelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelClientesActionPerformed
@@ -241,11 +252,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
         relveiculosview.setVisible(true);
     }//GEN-LAST:event_jMenuItemRelVeiculosActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuMarcaVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMarcaVeiculoActionPerformed
         // TODO add your handling code here:
         CadastroMarcaVeiculoView cadastromarcaveiculoview = new CadastroMarcaVeiculoView();
         cadastromarcaveiculoview.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuMarcaVeiculoActionPerformed
+
+    private void jMenuVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVeiculosActionPerformed
+        // TODO add your handling code here:
+        CadastroVeiculoView cadastroveiculoview = new CadastroVeiculoView();
+        cadastroveiculoview.setVisible(true);
+    }//GEN-LAST:event_jMenuVeiculosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,16 +312,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuClientes;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemAlugueis;
     private javax.swing.JMenuItem jMenuItemCidades;
     private javax.swing.JMenuItem jMenuItemRelClientes;
     private javax.swing.JMenuItem jMenuItemRelVeiculos;
     private javax.swing.JMenuItem jMenuItemSair;
+    private javax.swing.JMenuItem jMenuMarcaVeiculo;
     private javax.swing.JMenu jMenuMovimentos;
     private javax.swing.JMenu jMenuRelatorios;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenuItem jMenuTpPagamento;
     private javax.swing.JMenuItem jMenuUsuarios;
+    private javax.swing.JMenuItem jMenuVeiculos;
     // End of variables declaration//GEN-END:variables
 }

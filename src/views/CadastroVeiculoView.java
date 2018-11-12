@@ -6,6 +6,8 @@
 package views;
 
 import controller.VeiculoController;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import models.Veiculo;
 import tools.CaixaDeDialogo;
 import tools.Combos;
