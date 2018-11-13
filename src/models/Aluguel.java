@@ -13,8 +13,9 @@ public class Aluguel {
     
     private int codaluguel;
     private int codveic;
+    private int codcliente;
     private int codtppagamento;
-    private int login;
+    private String login;
     private int kminicio;
     private int kmfim;
     private String dtinicio;
@@ -39,6 +40,16 @@ public class Aluguel {
         this.codveic = codveic;
     }
 
+    public int getCodcliente() {
+        return codcliente;
+    }
+
+    public void setCodcliente(int codcliente) {
+        this.codcliente = codcliente;
+    }
+    
+    
+
     public int getCodtppagamento() {
         return codtppagamento;
     }
@@ -47,11 +58,11 @@ public class Aluguel {
         this.codtppagamento = codtppagamento;
     }
 
-    public int getLogin() {
+    public String getLogin() {
         return login;
     }
 
-    public void setLogin(int login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 
