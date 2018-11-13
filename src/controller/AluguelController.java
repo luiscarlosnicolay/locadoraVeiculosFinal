@@ -8,6 +8,9 @@ package controller;
 import connection.ConnectionFactory;
 import java.awt.Color;
 import java.awt.Component;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -218,6 +221,74 @@ public class AluguelController {
         
         System.out.println ("Executou buscar aluno com sucesso");
         return objAluguel;
+    }
+    
+    public boolean incluirAluguel(Aluguel objAluguel){      
+        
+        
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("INSERT INTO aluguel (codveic, codcliente, codtppagamento, login, kminicio, kmfim, dtinicio, dtfim, vldiaria, vlkmadicinal, vltotal)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+            stmt.setInt(1, objAluguel.getCodveic());
+            stmt.setInt(2, objAluguel.getCodcliente());
+            stmt.setInt(3, objAluguel.getCodtppagamento());
+            stmt.setString(4, objAluguel.getLogin());
+            stmt.setInt(5, objAluguel.getKminicio());
+            stmt.setInt(6, objAluguel.getKmfim());
+            stmt.setDate(7, Date.valueOf(objAluguel.getDtinicio()));
+            stmt.setDate(8, Date.valueOf(objAluguel.getDtfim()));
+            stmt.setDouble(9, objAluguel.getVldiaria());
+            stmt.setDouble(10, objAluguel.getVlkmadicional());
+            stmt.setDouble(11, objAluguel.getVltotal());
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }        
+    }
+    
+    public boolean alterarCliente(){
+ 
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+ 
+        try {
+            stmt = con.prepareStatement("UPDATE aluguel SET codveic=?, codcliente=?, codtppagamento=?, login=?, kminicio=?, kmfim=?, dtinicio=?, dtfim=?, vldiaria=?, vlkmadicinal=?, vltotal=? WHERE codaluguel=?");
+            stmt.setInt(1, objAluguel.getCodveic());
+            stmt.setInt(2, objAluguel.getCodcliente());
+            stmt.setInt(3, objAluguel.getCodtppagamento());
+            stmt.setString(4, objAluguel.getLogin());
+            stmt.setInt(5, objAluguel.getKminicio());
+            stmt.setInt(6, objAluguel.getKmfim());
+            stmt.setDate(7, Date.valueOf(objAluguel.getDtinicio()));
+            stmt.setDate(8, Date.valueOf(objAluguel.getDtfim()));
+            stmt.setDouble(9, objAluguel.getVldiaria());
+            stmt.setDouble(10, objAluguel.getVlkmadicional());
+            stmt.setDouble(11, objAluguel.getVltotal());
+            stmt.setInt(12, objAluguel.getCodaluguel());
+            
+ 
+            stmt.executeUpdate();
+ 
+            return true;
+ 
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+ 
     }
     
 }
