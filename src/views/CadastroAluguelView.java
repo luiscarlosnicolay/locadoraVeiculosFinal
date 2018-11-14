@@ -19,6 +19,7 @@ public class CadastroAluguelView extends javax.swing.JFrame {
     
     Combos cbVeiculo, cbCliente, cbTpPag;
     Aluguel objAluguel;
+    String login = LoginView.LoginUsuario.getLogin();
 
     /**
      * Creates new form CadastroAluguelView
@@ -42,6 +43,7 @@ public class CadastroAluguelView extends javax.swing.JFrame {
             cbTpPag.PreencheCombo("SELECT codtppag, tipotppag FROM tppagamento ORDER BY tipotppag");
 
             //limparTela();
+            lblUsuario.setText(LoginView.LoginUsuario.getNome());
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
@@ -58,6 +60,32 @@ public class CadastroAluguelView extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             CaixaDeDialogo.obterinstancia().exibirMensagem("ERRO:" + ex.getMessage());
+        }
+    }
+    
+    private void limparTela() {
+        try {
+            //LIMPAR OS CAMPOS DA TELA
+            //LIBERAR O CAMPO MATRICULA
+            cbVeiculo.SetaComboBox("");
+            cbCliente.SetaComboBox("");
+            cbTpPag.SetaComboBox("");
+            txtKmInicio.setText("");
+            txtKmFim.setText("");
+            txtDataInicio.setText("");
+            txtDataFim.setText("");
+            txtVlDiaria.setText("");
+            txtKmAdicional.setText("");
+            txtVlTotal.setText("");
+            
+            //Formata o campo data de nascimento
+            Formatacao.colocaMascara(txtDataInicio, "##/##/####");
+            Formatacao.colocaMascara(txtDataFim, "##/##/####");
+            
+            atualizarTabela();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
         }
     }
 
@@ -98,8 +126,9 @@ public class CadastroAluguelView extends javax.swing.JFrame {
         btnAlterarAluguel = new javax.swing.JButton();
         btnExcluirAluguel = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
+        lblUsuario = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -158,15 +187,46 @@ public class CadastroAluguelView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtbAluguel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbAluguelMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbAluguel);
 
+        btnIncluirAluguel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-add.png"))); // NOI18N
         btnIncluirAluguel.setText("Incluir");
+        btnIncluirAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncluirAluguelActionPerformed(evt);
+            }
+        });
 
+        btnAlterarAluguel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil.png"))); // NOI18N
         btnAlterarAluguel.setText("Alterar");
+        btnAlterarAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarAluguelActionPerformed(evt);
+            }
+        });
 
+        btnExcluirAluguel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sign-delete.png"))); // NOI18N
         btnExcluirAluguel.setText("Excluir");
+        btnExcluirAluguel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirAluguelActionPerformed(evt);
+            }
+        });
 
+        btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/box.png"))); // NOI18N
         btnLimparCampos.setText("Limpar");
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
+
+        lblUsuario.setText("jLabel12");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,62 +235,66 @@ public class CadastroAluguelView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jcbVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jcbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jcbTpPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtKmInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtKmFim))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtVlDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel10)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtKmAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel11)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtVlTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnIncluirAluguel)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAlterarAluguel)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnExcluirAluguel)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnLimparCampos)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtVlDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtKmAdicional, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtVlTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jcbVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jcbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jcbTpPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtKmInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtKmFim, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnIncluirAluguel)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAlterarAluguel)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluirAluguel)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimparCampos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblUsuario)
+                        .addGap(48, 48, 48))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,12 +330,14 @@ public class CadastroAluguelView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIncluirAluguel)
-                    .addComponent(btnAlterarAluguel)
-                    .addComponent(btnExcluirAluguel)
-                    .addComponent(btnLimparCampos))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnIncluirAluguel)
+                        .addComponent(btnAlterarAluguel)
+                        .addComponent(btnExcluirAluguel)
+                        .addComponent(btnLimparCampos)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -285,6 +351,209 @@ public class CadastroAluguelView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtKmFimActionPerformed
 
+    private void btnIncluirAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirAluguelActionPerformed
+        // TODO add your handling code here:
+        try {
+                if(validarDados() == true){
+
+                    guardarDados();
+
+                    AluguelController objAluguelCon = new AluguelController(objAluguel, null);
+            
+                    if (objAluguelCon.incluirAluguel(objAluguel, login) == true) {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Aluguel incluído com Sucesso!");
+                    } else {
+                        CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao incluir Aluguel!");
+                    }
+                    
+                    limparTela();
+                    
+                }else {
+                        //CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                        return;
+                    }
+                } catch (Exception ex) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+                }
+    }//GEN-LAST:event_btnIncluirAluguelActionPerformed
+
+    private void btnAlterarAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarAluguelActionPerformed
+        // TODO add your handling code here:
+        try {
+            if(validarDados() == true){
+
+                guardarDados();
+
+                AluguelController objAluguelCon = new AluguelController(objAluguel, null);
+                
+                if (objAluguelCon.alterarAluguel() == true) {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Aluguel alterado com Sucesso!");
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao alterar Aluguel!");
+                }
+
+                limparTela();
+                
+                } else {
+                    CaixaDeDialogo.obterinstancia().exibirMensagem("Campos inválidos"); 
+                    return;
+                }
+                
+            } catch (Exception ex) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnAlterarAluguelActionPerformed
+
+    private void btnExcluirAluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirAluguelActionPerformed
+        // TODO add your handling code here:
+        AluguelController objAluguelCon = new AluguelController(null, null);
+        try {
+            if (objAluguelCon.excluirAluguel(objAluguel) == true) {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Aluguel removido com Sucesso!");
+            } else {
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Erro ao remover Aluguel!");
+            }
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+        
+        limparTela();
+    }//GEN-LAST:event_btnExcluirAluguelActionPerformed
+
+    private void jtbAluguelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbAluguelMouseClicked
+        // TODO add your handling code here:
+        try {
+
+            //pega a linha selecionada
+            int linhaSelecionada = jtbAluguel.getSelectedRow();
+            // Primeira coluna da linha
+            String coluna1 = jtbAluguel.getModel().getValueAt(linhaSelecionada, 0).toString();
+
+            //basta agora chamar o método buscar, passando o COLUNA1 como parâmetro de consulta
+            AluguelController objAluguelCon = new AluguelController(null, null);
+            objAluguel = objAluguelCon.buscarAluguel(coluna1);
+
+            preencheCampos();
+
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jtbAluguelMouseClicked
+
+    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        // TODO add your handling code here:
+        limparTela();
+    }//GEN-LAST:event_btnLimparCamposActionPerformed
+
+    private void preencheCampos() {
+        try {
+            cbVeiculo.SetaComboBox(String.valueOf(objAluguel.getCodveic()));
+            cbCliente.SetaComboBox(String.valueOf(objAluguel.getCodcliente()));
+            cbTpPag.SetaComboBox(String.valueOf(objAluguel.getCodtppagamento()));
+            //Ajusta a data para DIA/MES/ANO
+            String dataFormatada1 = Formatacao.ajustaDataDMA(objAluguel.getDtinicio());
+            txtDataInicio.setText(dataFormatada1);
+            
+            String dataFormatada2 = Formatacao.ajustaDataDMA(objAluguel.getDtfim());
+            txtDataFim.setText(dataFormatada2);
+            
+            txtKmInicio.setText(String.valueOf(objAluguel.getKminicio()));
+            txtKmFim.setText(String.valueOf(objAluguel.getKmfim()));
+            txtKmAdicional.setText(String.valueOf(objAluguel.getVlkmadicional()));
+            txtVlDiaria.setText(String.valueOf(objAluguel.getVldiaria()));
+            txtVlTotal.setText(String.valueOf(objAluguel.getVltotal()));
+            
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+        }
+    }
+
+    private void guardarDados() {
+        
+        try {
+             if (objAluguel == null) {
+                objAluguel = new Aluguel();
+            }
+            Combos c = (Combos) jcbVeiculo.getSelectedItem();
+            String codigoVeiculo = c.getCodigo();
+            objAluguel.setCodveic(Integer.parseInt(codigoVeiculo));
+            
+            Combos d = (Combos) jcbCliente.getSelectedItem();
+            String codigoCliente = d.getCodigo();
+            objAluguel.setCodcliente(Integer.parseInt(codigoCliente));
+            
+            Combos e = (Combos) jcbTpPag.getSelectedItem();
+            String codigoTpPag = e.getCodigo();
+            objAluguel.setCodtppagamento(Integer.parseInt(codigoTpPag));
+            
+            objAluguel.setKminicio(Integer.parseInt(txtKmInicio.getText()));
+            objAluguel.setKmfim(Integer.parseInt(txtKmFim.getText()));
+            
+            String dataFormatada1 = Formatacao.ajustaDataAMD(txtDataInicio.getText());
+            String dataFormatada2 = Formatacao.ajustaDataAMD(txtDataFim.getText());
+            
+            objAluguel.setDtinicio(dataFormatada1);
+            objAluguel.setDtfim(dataFormatada2);            
+            objAluguel.setVldiaria(Double.parseDouble(txtVlDiaria.getText()));
+            objAluguel.setVlkmadicional(Double.parseDouble(txtKmAdicional.getText()));
+            objAluguel.setVltotal(Double.parseDouble(txtVlTotal.getText()));
+
+        }catch(Exception ex){
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Problemas no guardaDados: " + ex.getMessage());
+        }
+    }
+    
+    private boolean validarDados() {
+        try {
+            //VALIDAR O CAMPOS DA TELA
+            //RETURN FALSE SE ALGUM CAMPO NAO ESTA PREENCHIDO CORRETAMENTE
+            if(jcbVeiculo.getSelectedIndex() == 0){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Selecione um Veiculo", "Atenção", 'e');
+                return false;
+            }
+            if(jcbCliente.getSelectedIndex() == 0){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Selecione um Cliente", "Atenção", 'e');
+                return false;
+            }
+            if(jcbTpPag.getSelectedIndex() == 0){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Selecione umTipo de Pagamento", "Atenção", 'e');
+                return false;
+            }
+            if((txtKmInicio.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("KM Inicio Incorreto", "Atenção", 'e');
+                return false;
+            }
+            if((txtKmFim.getText().trim().equals(""))){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("KM Fim Incorreto", "Atenção", 'e');
+                return false;
+            }
+            if(txtDataInicio.getText().equals("")){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Data Inicio Inválida", "Atenção", 'e');
+                return false;
+            }
+            if(txtDataFim.getText().equals("")){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Data Fim Inválida", "Atenção", 'e');
+                return false;
+            }
+            if(txtVlDiaria.getText().equals("")){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Valor de Diária Inválido", "Atenção", 'e');
+                return false;
+            }
+            if(txtKmAdicional.getText().equals("")){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Valor de KM Adicional Inválido", "Atenção", 'e');
+                return false;
+            }
+            if(txtVlTotal.getText().equals("")){
+                CaixaDeDialogo.obterinstancia().exibirMensagem("Valor Total Inválido", "Atenção", 'e');
+                return false;
+            }
+            return true;
+        } catch (Exception ex) {
+            CaixaDeDialogo.obterinstancia().exibirMensagem("Erro: " + ex.getMessage());
+            return false;
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -342,6 +611,7 @@ public class CadastroAluguelView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbTpPag;
     private javax.swing.JComboBox<String> jcbVeiculo;
     private javax.swing.JTable jtbAluguel;
+    private javax.swing.JLabel lblUsuario;
     private javax.swing.JFormattedTextField txtDataFim;
     private javax.swing.JFormattedTextField txtDataInicio;
     private javax.swing.JTextField txtKmAdicional;

@@ -230,8 +230,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemAlugueisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlugueisActionPerformed
         // TODO add your handling code here:
-        CadastroAluguelView cadastroaluguelview = new CadastroAluguelView();
-        cadastroaluguelview.setVisible(true);
+        CadastroAluguelView cadaluguelview = new CadastroAluguelView();
+        cadaluguelview.setVisible(true);
     }//GEN-LAST:event_jMenuItemAlugueisActionPerformed
 
     private void jMenuItemRelClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelClientesActionPerformed

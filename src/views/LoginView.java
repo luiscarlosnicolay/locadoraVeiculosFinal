@@ -25,6 +25,8 @@ import models.Usuario;
  * @author Janquiel Kappler
  */
 public class LoginView extends javax.swing.JFrame {
+    
+    public static Usuario LoginUsuario = null;
 
     /**
      * Creates new form viewLogin
@@ -165,10 +167,10 @@ public class LoginView extends javax.swing.JFrame {
         if(user == null){
             CaixaDeDialogo.obterinstancia().exibirMensagem("Confira nome de usuário e/ou senha");
         } else{
-            
-             TelaPrincipal tp = new TelaPrincipal();
-             tp.setVisible(true);
-             this.setVisible(false);
+            LoginUsuario = user;
+            TelaPrincipal tp = new TelaPrincipal();
+            tp.setVisible(true);
+            this.setVisible(false);
         }           
     }//GEN-LAST:event_btnEntrarActionPerformed
 

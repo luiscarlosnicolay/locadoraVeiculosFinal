@@ -62,7 +62,7 @@ public class AluguelController {
             SQL += " FROM aluguel a, veiculo v, cliente c, tppagamento tp, usuarios u";
             SQL += " WHERE a.codveic = v.codveic ";
             SQL += " AND a.codcliente = c.codcliente ";
-            SQL += " AND a.codtppagamento = tp.codtppagamento ";
+            SQL += " AND a.codtppag = tp.codtppag ";
             SQL += " AND a.login = u.login ";
             SQL += " ORDER BY nmcliente ";
             
@@ -142,9 +142,6 @@ public class AluguelController {
                 case 11:
                     column.setPreferredWidth(30);
                     break;
-                case 12:
-                    column.setPreferredWidth(30);
-                    break;
             }
         }
         
@@ -175,12 +172,12 @@ public class AluguelController {
             ResultSet rs = null;
 
             String SQL = "";
-            SQL = " SELECT a.codaluguel, v.modelo, c.nmcliente, tp.tipotppag, u.login, a.kminicio, a.kmfim, a.dtinicio, a.dtfim, a.vldiaria, a.vlkmadicional, a.vltotal ";
+            SQL = " SELECT a.codaluguel, v.codveic, c.codcliente, tp.codtppag, u.login, a.kminicio, a.kmfim, a.dtinicio, a.dtfim, a.vldiaria, a.vlkmadicional, a.vltotal ";
             SQL += " FROM aluguel a, veiculo v, cliente c, tppagamento tp, usuarios u";
             SQL += " WHERE a.codaluguel = '" + id + "' ";
             SQL += " AND a.codveic = v.codveic ";
             SQL += " AND a.codcliente = c.codcliente ";
-            SQL += " AND a.codtppagamento = tp.codtppagamento ";
+            SQL += " AND a.codtppag = tp.codtppag ";
             SQL += " AND a.login = u.login ";
             SQL += " ORDER BY nmcliente ";
 
@@ -223,7 +220,7 @@ public class AluguelController {
         return objAluguel;
     }
     
-    public boolean incluirAluguel(Aluguel objAluguel){      
+    public boolean incluirAluguel(Aluguel objAluguel, String login){      
         
         
         ConnectionFactory.abreConexao();
@@ -231,11 +228,11 @@ public class AluguelController {
         PreparedStatement stmt = null;
         
         try {
-            stmt = con.prepareStatement("INSERT INTO aluguel (codveic, codcliente, codtppagamento, login, kminicio, kmfim, dtinicio, dtfim, vldiaria, vlkmadicinal, vltotal)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO aluguel (codveic, codcliente, codtppag, login, kminicio, kmfim, dtinicio, dtfim, vldiaria, vlkmadicional, vltotal)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
             stmt.setInt(1, objAluguel.getCodveic());
             stmt.setInt(2, objAluguel.getCodcliente());
             stmt.setInt(3, objAluguel.getCodtppagamento());
-            stmt.setString(4, objAluguel.getLogin());
+            stmt.setString(4, login);
             stmt.setInt(5, objAluguel.getKminicio());
             stmt.setInt(6, objAluguel.getKmfim());
             stmt.setDate(7, Date.valueOf(objAluguel.getDtinicio()));
@@ -256,26 +253,25 @@ public class AluguelController {
         }        
     }
     
-    public boolean alterarCliente(){
+    public boolean alterarAluguel(){
  
         ConnectionFactory.abreConexao();
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
  
         try {
-            stmt = con.prepareStatement("UPDATE aluguel SET codveic=?, codcliente=?, codtppagamento=?, login=?, kminicio=?, kmfim=?, dtinicio=?, dtfim=?, vldiaria=?, vlkmadicinal=?, vltotal=? WHERE codaluguel=?");
+            stmt = con.prepareStatement("UPDATE aluguel SET codveic=?, codcliente=?, codtppag=?, kminicio=?, kmfim=?, dtinicio=?, dtfim=?, vldiaria=?, vlkmadicional=?, vltotal=? WHERE codaluguel=?");
             stmt.setInt(1, objAluguel.getCodveic());
             stmt.setInt(2, objAluguel.getCodcliente());
             stmt.setInt(3, objAluguel.getCodtppagamento());
-            stmt.setString(4, objAluguel.getLogin());
-            stmt.setInt(5, objAluguel.getKminicio());
-            stmt.setInt(6, objAluguel.getKmfim());
-            stmt.setDate(7, Date.valueOf(objAluguel.getDtinicio()));
-            stmt.setDate(8, Date.valueOf(objAluguel.getDtfim()));
-            stmt.setDouble(9, objAluguel.getVldiaria());
-            stmt.setDouble(10, objAluguel.getVlkmadicional());
-            stmt.setDouble(11, objAluguel.getVltotal());
-            stmt.setInt(12, objAluguel.getCodaluguel());
+            stmt.setInt(4, objAluguel.getKminicio());
+            stmt.setInt(5, objAluguel.getKmfim());
+            stmt.setDate(6, Date.valueOf(objAluguel.getDtinicio()));
+            stmt.setDate(7, Date.valueOf(objAluguel.getDtfim()));
+            stmt.setDouble(8, objAluguel.getVldiaria());
+            stmt.setDouble(9, objAluguel.getVlkmadicional());
+            stmt.setDouble(10, objAluguel.getVltotal());
+            stmt.setInt(11, objAluguel.getCodaluguel());
             
  
             stmt.executeUpdate();
@@ -289,6 +285,30 @@ public class AluguelController {
             ConnectionFactory.closeConnection(con, stmt);
         }
  
+    }
+    
+    public boolean excluirAluguel(Aluguel objAluguel){      
+        
+        
+        ConnectionFactory.abreConexao();
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("DELETE FROM aluguel WHERE codaluguel = ? ");
+            stmt.setInt(1, objAluguel.getCodaluguel());
+            
+            stmt.executeUpdate();
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+        
     }
     
 }
